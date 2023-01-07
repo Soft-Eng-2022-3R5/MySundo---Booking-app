@@ -11,7 +11,7 @@ export default function ResetPassword({navigation}){
         <View>
             <Text>hello</Text>
             <Text>hello kamusta na kayo!!</Text>
-        
+            <Text>try test</Text>
         </View>
 
     )}
