@@ -8,6 +8,10 @@ export default function ResetPassword({navigation}){
 
     return(
 
-        <View><Text>hello</Text></View>
+        <View>
+            <Text>hello</Text>
+            <Text>hello kamusta na kayo!!</Text>
+        
+        </View>
 
     )}
