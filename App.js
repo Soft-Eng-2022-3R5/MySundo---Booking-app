@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import FirstScreen from './FirstScreen'
 import LoginScreen from './LoginScreen';
-
+import ResetPassword from './ResetPassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +18,8 @@ return(
         
         <Stack.Screen options={{headerShown:false}} name='FirstScreen' component={FirstScreen}/>
         <Stack.Screen options={{headerShown:false}} name='LoginScreen' component={LoginScreen}/>
-
+        <Stack.Screen options={{headerShown:false}} name='ResetPassword' component={ResetPassword}/>
+        
     </Stack.Navigator>
     
 </NavigationContainer>

@@ -169,8 +169,11 @@ export default function LoginScreen({navigation}){
 
                 <Text style={styles.fontstyle4}>Forgot the password?
 
-                    <TouchableOpacity>
+
+                    <TouchableOpacity onPress={()=>{navigation.navigate('ResetPassword');}}>
+
                         <Text style={{color:'#438EFF',top:4,}}>  click here</Text>
+
                     </TouchableOpacity>
 
                 </Text>
