@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@homielab/react-native-auto-scroll": "^0.0.8",
+    "@react-native-community/clipboard": "^1.5.1",
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.7",
+    "@twotalltotems/react-native-otp-input": "^1.3.11",
     "expo": "^47.0.12",
     "expo-linear-gradient": "~12.0.1",
     "expo-status-bar": "~1.4.2",

@@ -11,14 +11,14 @@ export const styles = StyleSheet.create({
 
 container:{
     flex:1,
-    backgroundColor: 'pink',
+    backgroundColor: 'white',
     flexDirection:'column'
 },
 
 bgstyle:{
     //flex:1,
     width: windowWidth,
-    height: '100%',
+    height: windowHeight,
     
 },
 

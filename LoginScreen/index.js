@@ -1,7 +1,7 @@
 import { View,Text, Image, TouchableOpacity,StatusBar,TextInput,Alert} from "react-native"
 import { React,useState } from "react"
 import { styles } from "./styles";
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 
@@ -33,7 +33,8 @@ export default function LoginScreen({navigation}){
           [textinput]: false
         })
       }
-
+    
+      console.log(email)
    
     return(
    
@@ -90,7 +91,7 @@ export default function LoginScreen({navigation}){
                                { borderColor: '#438EFF' }] : styles.textinputstyle}
                         
                         placeholder="Email"
-                        value={email}
+                        
                         onChangeText = {setEmail}
                         onFocus={() => handleInputFocus('entry1')}
                          onBlur={() => handleInputBlur('entry1')}
@@ -125,7 +126,7 @@ export default function LoginScreen({navigation}){
                     >
                        
 
-                     <Icon name={passoption === false ? 'eye' : 'eye-slash'} size={20} color={'#7A7A7A'}/>
+                     <Icon name={passoption === false ? 'eye' : 'eye-off-outline'} size={20} color={'#7A7A7A'}/>
           
                     </TouchableOpacity>
                 </View>
@@ -170,7 +171,7 @@ export default function LoginScreen({navigation}){
                 <Text style={styles.fontstyle4}>Forgot the password?
 
 
-                    <TouchableOpacity onPress={()=>{navigation.navigate('ResetPassword');}}>
+                    <TouchableOpacity onPress={()=>{navigation.navigate('Screen1');}}>
 
                         <Text style={{color:'#438EFF',top:4,}}>  click here</Text>
 
