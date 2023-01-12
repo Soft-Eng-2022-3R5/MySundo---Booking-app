@@ -2,8 +2,7 @@ import { View,Text, Image, TouchableOpacity,StatusBar,TextInput,Alert} from "rea
 import { React,useState } from "react"
 import { styles } from "./styles";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-
+import CarouselComponent from "../Components/CarouselComponents";
 
 
 export default function LoginScreen({navigation}){
@@ -42,31 +41,17 @@ export default function LoginScreen({navigation}){
             
             <StatusBar barStyle='light-content' translucent backgroundColor="transparent"/>
         
-
-           
-
             <Image
                 style={styles.bgstyle}
                 source={require('../assets/background.jpg')}
                 resizeMode='cover'
             />
-
-            
-            
-            <View style={styles.carousel}>
-
-    
-                    <Image 
-                    source={require('../assets/image_3.png')} resizeMode='cover' 
-                    style={{width:'100%',height:'100%',borderBottomLeftRadius: 70,
-                    borderBottomRightRadius: 70,}} />
                 
+            <View style={styles.carousel}>
+                    <CarouselComponent/>
                     </View>
 
                   
-            <View style={styles.filter}/>
-
-
             <View style={styles.backbutton}>
 
                 <TouchableOpacity onPress={()=>{navigation.navigate('FirstScreen');}}> 

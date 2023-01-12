@@ -1,47 +1,29 @@
-import { StyleSheet } from "react-native";
-
+import { StyleSheet,Dimensions } from "react-native";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
 
 container:{
     flex:1,
-    backgroundColor: 'pink',
-    //justifyContent: 'center'
+    backgroundColor: 'white',
     flexDirection:'column'
 },
 
 bgstyle:{
-    flex:1,
-    width: undefined,
-    height: undefined,
     
-},
-
-filter:{
-    flex:1,
-    position: 'absolute',
-    backgroundColor: 'black',
-    width: '100%',
-    height: '50%',
-    borderBottomLeftRadius: 70,
-    borderBottomRightRadius: 70,
-    opacity:0.2,
-
+    width: windowWidth,
+    height: windowHeight,
     
-
 },
 
 carousel:{
-    flex:1,
     position: 'absolute',
-    backgroundColor: 'violet',
     width: '100%',
     height: '50%',
     borderBottomLeftRadius: 70,
     borderBottomRightRadius: 70,
-    flexDirection:'column',
-    alignItems: "flex-start",
-    
 
 },
 
@@ -55,10 +37,10 @@ backbutton:{
     
     },
     
-    Logo:{
+Logo:{
     fontFamily:'Roboto',
     fontWeight:'bold',
-    fontSize:27,
+    fontSize:RFValue(27,680),
     color:'white',
     paddingLeft:10,
     top:5,
@@ -72,26 +54,23 @@ backbutton:{
 pannel1:{
     flex:1,
     position: 'absolute',
+    alignItems:'center',
     backgroundColor: 'white',
     width: '100%',
-    height: '50%',
+    height: windowHeight/1.9,
     alignSelf: 'center',
     marginLeft:'30%',
-    top:280,
+    top: windowHeight/3,
     borderRadius: 20,
     shadowRadius: 1,
     elevation: 5,
  
-
-    
-
-    //alignItems:'center'
 },
 
 
 fontstyle1:{
     textAlign:'center',
-    fontSize: 23,
+    fontSize: RFValue(23,680),
     fontWeight:'700',
     fontFamily: 'Roboto',
     paddingTop: 30,
@@ -103,100 +82,109 @@ fontstyle2:{
     marginLeft: '10%',
     marginRight: '10%',
     paddingTop:15,
-    fontSize: 14,
+    fontSize: RFValue(14,680),
     fontFamily: 'Roboto',  
 },
 
 fontstyle3:{
     textAlign: 'center',
     alignSelf:'center',
-    fontSize: 14,
+    fontSize: RFValue(14,680),
     fontFamily: 'Roboto',  
-    top:80,
+    top:windowHeight/11.6,
     backgroundColor:'white',
-    width:120,
+    width:windowWidth/3,
     
    },
 
 SignUpbutton:{
-    alignSelf:'center',
+    //alignSelf:'center',
     backgroundColor:'white',
     borderWidth:2,
     borderColor:'#25FFC4',
-    width:160,
-    height:40,
-    top:50,
+    width:windowWidth/2,
+    height:'11%',
+    top:windowHeight/17,
     marginBottom:'5%',
     borderRadius:10,
     
 },
 
 Loginbutton:{
-    alignSelf:'center',
+
+    //alignSelf:'center',
     backgroundColor:'white',
-    borderWidth:2,
-    borderColor:'white',
-    width:160,
-    height:40,
-    top:50,
+    //alignItems:'center',
+    width:windowWidth/2,
+    height:'11%',
+    top:windowHeight/17,
     //marginBottom:'5%',
     borderRadius:10,
-     
 },
 
 sample:{
-    alignSelf:'center',
-    width:160,
-    height:40,
+    //alignSelf:'center',
+    width:'100%',
+    height:'100%',
     borderRadius:10,
 
 },
 line:{
-    top:90,
-    borderColor:'#A9A9A9',
-    borderWidth:0.4,
+    top:windowHeight/9.8,
+    width:'80%',
+    borderColor:'#d9d9d9',
+    borderWidth:1,
     marginLeft:'10%',
     marginRight:'10%',
 },
 
 container2:{
-    flex:1,
+    //flex:1,
     position:'absolute',
-    alignSelf:'center',
-    height:50,
-    top:330,
-    width:200,
+    //alignSelf:'center',
+    height:windowHeight/14,
+    top:windowHeight/2.4,
+    width:'70%',
+    alignItems:'stretch',
+    //backgroundColor:'pink',
     flexDirection:'row',
-    alignItems:'center',
     justifyContent:'space-around',
+    
     
 },
 
 icon1:{
    
-   
-    height:40,
-    width: 40,
-    borderRadius:100,
+    height:'100%',
+    width: '25%',
 
 },
 
 icon2:{
-    
-    
-    height:40,
-    width: 40,
-    margin:'10%',
-    borderRadius:100,
+        
+    height:'100%',
+    width: '25%',
 
+   
 },
 
 icon3:{
     
-    height:40,
-    width: 40, 
-    borderRadius:100,
+    height:'100%',
+    width: '25%',
+  
+},
 
+signupfont:{
+    textAlign: 'center',top:'10%',
+    fontSize:RFValue(20,680),fontFamily:'Roboto',
+    fontWeight:'bold',color:'#25FFC4'
+},
+
+loginfont:{
+    textAlign: 'center',top:'-85%',
+    fontSize:RFValue(20,680),fontFamily:'Roboto',
+    fontWeight:'bold',color:'white'
 },
 
 })

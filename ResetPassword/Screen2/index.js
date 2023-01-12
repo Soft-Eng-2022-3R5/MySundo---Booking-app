@@ -1,20 +1,26 @@
-import { View,Text, Image, TouchableOpacity,StatusBar,TextInput,Alert, } from "react-native"
+import { View,Text, Image, 
+        TouchableOpacity,StatusBar,
+        TextInput as Firstbox,
+        TextInput as Secondbox,
+        TextInput as Thirdbox,
+        TextInput as Fourthbox,
+        Alert 
+        } from "react-native"
+
 import { React,useState,useRef } from "react"
 import { styles } from "../Screen2/styles";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import OTPInputView from '@twotalltotems/react-native-otp-input'
 
-export default function Screen2({navigation}){
+
+export default function Screen3({navigation}){
     
    
-
     const [verfiedemail,setVerfiedemail] = useState('')
     
     const [otp,setOtp] = useState([])
 
     console.log(otp)
   
-
     const [isFocused, setIsFocused] = useState({
         entry1: false,
         entry2: false,
@@ -29,7 +35,6 @@ export default function Screen2({navigation}){
           [textinput]: false
         })
       }
-
       const firstInput = useRef()
       const secondtInput = useRef()
       const thirdInput = useRef()
@@ -54,75 +59,110 @@ export default function Screen2({navigation}){
                         <Text style={styles.fontstyle1}>ENTER THE 4-DIGIT RECOVERY CODE</Text>
                         <Text style={styles.fontstyle2}>The recovery code was sent to your email address. Please enter the code below.</Text>
 
-
                     <View style={styles.textfield}>
-                        <TextInput style={styles.textinput}
+
+                        <Firstbox style={styles.textinput}
                             keyboardType='number-pad'
                             maxLength={1}
                             ref={firstInput}
                             onChangeText={(text)=>{
+                            if(text ===""){
+                                otp.pop()
+                            }
+                            else{
                                 setOtp([...otp,text])
-
-                            //{(text)=>{setOtp({...otp, 1: text})
                                 text && secondtInput.current.focus()
+                            }
+                            console.log(otp,'current value')
                             }}
-                        
                         />
-                        <TextInput style={styles.textinput}
+                        <Secondbox style={styles.textinput}
                             keyboardType='number-pad'
                             maxLength={1}
                             ref={secondtInput}
+                            onKeyPress={({nativeEvent}) =>{
+                                if (nativeEvent.key === 'Backspace'){   
+                                    firstInput.current.focus() 
+                                }
+                            }}
                             onChangeText={(text)=>{
-                                setOtp([...otp,text])
-                                text ? thirdInput.current.focus() : firstInput.current.focus()
+                            
+                                if(text ===""){
+                                    otp.pop()
+                                    !text && firstInput.current.focus()
+                                }
+                                else{
+                                    setOtp([...otp,text])
+                                    text && thirdInput.current.focus()
+                                }
+                                console.log(otp,'current value')
                             }}
                         
                         />
-                        <TextInput style={styles.textinput}
+
+                        <Thirdbox style={styles.textinput}
                             keyboardType='number-pad'
                             maxLength={1}
                             ref={thirdInput}
-                            onChangeText={(text)=>{
-                                setOtp([...otp,text])
-                                text ? fourthInput.current.focus() : secondtInput.current.focus()
-                            }}
 
-                        
+                            onKeyPress={({nativeEvent}) =>{
+                                if (nativeEvent.key === 'Backspace'){           
+                                    secondtInput.current.focus() 
+                                }       
+                            }}
+                            onChangeText={(text)=>{
+
+                                if(text ===""){
+                                    otp.pop()
+                                    !text && secondtInput.current.focus()
+                                }
+                                else{
+                                    setOtp([...otp,text])
+                                    text && fourthInput.current.focus()
+                                }
+                                console.log(otp,'current value')
+                            }}
                         />
-                        <TextInput style={styles.textinput}
+                        <Fourthbox style={styles.textinput}
                             keyboardType='number-pad'
                             maxLength={1}
                             ref={fourthInput}
+
+                            onKeyPress={({nativeEvent}) =>{
+
+                                if (nativeEvent.key === 'Backspace'){
+                                    
+                                    thirdInput.current.focus() 
+                                } 
+                            }}
                             onChangeText={(text)=>{
-                                setOtp([...otp,text])
-                                !text && thirdInput.current.focus()
+                              
+                                if(text ===""){
+                                    otp.pop()
+                                    !text && thirdInput.current.focus()
+                                }
+                                else{
+                                    setOtp([...otp,text])
+                                    
+                                }
+                                console.log(otp,'current value')
                             }}
 
-                        
                         />
                     
                         </View>
-                      
-                            
-                          
 
-
-                      
 
                     <TouchableOpacity style={styles.buttonstyle}
 
-                        onPress={()=>{
+                        onPress={()=>{navigation.navigate('Screen3')
+                            
+                        console.log(otp.toString())
+                            
+                    }}
+                        
 
-                            if (JSON.stringify(otp) != '1234'){
-                                Alert.alert('No account found',"There's no Sundo Account with the email that you provided.",[
-                                    {text:'close', onPress: () => console.log('alert closed')},
-                                
-                                ]);
-                            }
-                            else if (otp == '1234'){
-                                navigation.navigate('LoginScreen');
-                            }
-                        }}
+                           
    
                     >                                         
 
@@ -142,7 +182,7 @@ export default function Screen2({navigation}){
             
                 <View style={styles.backbutton}>
 
-                    <TouchableOpacity onPress={()=>{navigation.navigate('LoginScreen');}}> 
+                    <TouchableOpacity onPress={()=>{navigation.navigate('Screen1');}}> 
                         <Icon name={'arrow-left'} size={42} color={'white'} />
                     </TouchableOpacity >
 
