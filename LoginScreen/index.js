@@ -1,9 +1,8 @@
 import { View,Text, Image, TouchableOpacity,StatusBar,TextInput,Alert} from "react-native"
 import { React,useState } from "react"
 import { styles } from "./styles";
-import Icon from 'react-native-vector-icons/FontAwesome5';
-
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import CarouselComponent from "../Components/CarouselComponents";
 
 
 export default function LoginScreen({navigation}){
@@ -33,7 +32,8 @@ export default function LoginScreen({navigation}){
           [textinput]: false
         })
       }
-
+    
+      console.log(email)
    
     return(
    
@@ -41,31 +41,17 @@ export default function LoginScreen({navigation}){
             
             <StatusBar barStyle='light-content' translucent backgroundColor="transparent"/>
         
-
-           
-
             <Image
                 style={styles.bgstyle}
                 source={require('../assets/background.jpg')}
                 resizeMode='cover'
             />
-
-            
-            
-            <View style={styles.carousel}>
-
-    
-                    <Image 
-                    source={require('../assets/image_3.png')} resizeMode='cover' 
-                    style={{width:'100%',height:'100%',borderBottomLeftRadius: 70,
-                    borderBottomRightRadius: 70,}} />
                 
+            <View style={styles.carousel}>
+                    <CarouselComponent/>
                     </View>
 
                   
-            <View style={styles.filter}/>
-
-
             <View style={styles.backbutton}>
 
                 <TouchableOpacity onPress={()=>{navigation.navigate('FirstScreen');}}> 
@@ -90,7 +76,7 @@ export default function LoginScreen({navigation}){
                                { borderColor: '#438EFF' }] : styles.textinputstyle}
                         
                         placeholder="Email"
-                        value={email}
+                        
                         onChangeText = {setEmail}
                         onFocus={() => handleInputFocus('entry1')}
                          onBlur={() => handleInputBlur('entry1')}
@@ -125,7 +111,7 @@ export default function LoginScreen({navigation}){
                     >
                        
 
-                     <Icon name={passoption === false ? 'eye' : 'eye-slash'} size={20} color={'#7A7A7A'}/>
+                     <Icon name={passoption === false ? 'eye' : 'eye-off-outline'} size={20} color={'#7A7A7A'}/>
           
                     </TouchableOpacity>
                 </View>
@@ -170,7 +156,7 @@ export default function LoginScreen({navigation}){
                 <Text style={styles.fontstyle4}>Forgot the password?
 
 
-                    <TouchableOpacity onPress={()=>{navigation.navigate('ResetPassword');}}>
+                    <TouchableOpacity onPress={()=>{navigation.navigate('Screen1');}}>
 
                         <Text style={{color:'#438EFF',top:4,}}>  click here</Text>
 

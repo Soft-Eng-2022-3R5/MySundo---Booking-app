@@ -1,61 +1,38 @@
 import { StyleSheet,Dimensions } from "react-native";
 
-
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
-
 
 export const styles = StyleSheet.create({
 
 
 container:{
     flex:1,
-    backgroundColor: 'pink',
+    backgroundColor: 'white',
     flexDirection:'column'
 },
 
 bgstyle:{
-    //flex:1,
     width: windowWidth,
-    height: '100%',
-    
-},
-
-filter:{
-    flex:1,
-    position: 'absolute',
-    backgroundColor: 'black',
-    width: '100%',
-    height: 392,
-    borderBottomLeftRadius: 70,
-    borderBottomRightRadius: 70,
-    opacity:0.2,
-
-    
-
+    height: windowHeight,
 },
 
 carousel:{
-   flex:1,
-    position: 'absolute',
-    backgroundColor: 'green',
-    width: '100%',
-    height: 392,
-    borderBottomLeftRadius: 70,
-    borderBottomRightRadius: 70,
 
+    position: 'absolute',
+    width: '100%',
+    height: windowHeight / 2,
 
    
 },
 
 backbutton:{
-flex:1,
+
 position:'absolute',
 paddingLeft:10,
 paddingTop:40,
 flexDirection:'row',
-//justifyContent:'space-around',
+
 
 },
 
@@ -78,38 +55,22 @@ pannel1:{
     position: 'absolute',
     backgroundColor: 'white',
     width: '100%',
-    height: 430,
+    height: windowHeight/2.1,
     alignSelf: 'center',
     marginLeft:'30%',
     top:'30%',
     borderRadius: 20,
     shadowRadius: 1,
     elevation: 5,
- 
-
     
-
-    //alignItems:'center'
 },
-
-
 fontstyle1:{
     textAlign:'center',
-    fontSize: 23,
+    fontSize: 20,
     fontWeight:'700',
     fontFamily: 'Roboto',
     paddingTop: 30,
 },
-
-
-// fontstyle2:{
-//     textAlign: 'center',
-//     marginLeft: '10%',
-//     marginRight: '10%',
-//     paddingTop:15,
-//     fontSize: 14,
-//     fontFamily: 'Roboto',  
-// },
 
 fontstyle3:{
     textAlign: 'center',

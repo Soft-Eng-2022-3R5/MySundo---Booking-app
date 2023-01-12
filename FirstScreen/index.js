@@ -2,21 +2,14 @@ import { ImageBackground } from "react-native";
 import { View,Text, Image, TouchableOpacity,StatusBar } from "react-native"
 import { styles } from "./styles"
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import CarouselComponent from "../Components/CarouselComponents";
+
+
 export default function FirstScreen({navigation}){
-
-    const datapicture = [
-        {
-            id:1,
-            
-
-        }
-    ];
-
 
 
     return(
 
-        
         
         <View style={styles.container}>
             
@@ -29,32 +22,19 @@ export default function FirstScreen({navigation}){
             />
 
             
-            
-            
             <View style={styles.carousel}>
-
-                 
-
-                    {/* Temporary only */}
-                    <Image 
-                    source={require('../assets/image_2.png')} resizeMode='cover' 
-                    style={{width:'100%',height:'100%',borderBottomLeftRadius: 70,
-                    borderBottomRightRadius: 70,}} />
-
+                
+                <CarouselComponent/>
                     
             </View>
 
-            <View style={styles.filter}/>
-
+            
             <View style={styles.backbutton}>
 
          
-
                 <Text style={styles.Logo}>MY<Text style={{color:'#ACFF43'}}>SUNDO</Text></Text>
 
             </View>   
-
-
 
             <View style={styles.pannel1}>
         
@@ -63,12 +43,9 @@ export default function FirstScreen({navigation}){
                 
                 <TouchableOpacity style={styles.SignUpbutton}>
 
-                    <Text style={{textAlign: 'center',top:3,
-                                fontSize:20,fontFamily:'Roboto',
-                                fontWeight:'bold',color:'#25FFC4'}}>SIGNUP</Text>
+                    <Text style={styles.signupfont}>SIGNUP</Text>
 
                 </TouchableOpacity>
-
 
                 <TouchableOpacity style={styles.Loginbutton}
                     onPress={()=>{navigation.navigate('LoginScreen');}}
@@ -76,12 +53,10 @@ export default function FirstScreen({navigation}){
                 >
                     
                     <Image 
-                        source={require('../assets/button.png')} resizeMode='contain' 
+                        source={require('../assets/button.png')} resizeMode='cover' 
                         style={styles.sample} />
 
-                    <Text style={{textAlign: 'center',top:-35,
-                                fontSize:20,fontFamily:'Roboto',
-                                fontWeight:'bold',color:'white'}}>LOGIN</Text>
+                    <Text style={styles.loginfont}>LOGIN</Text>
                 </TouchableOpacity>
 
                 <View style={styles.line}/>
@@ -92,17 +67,16 @@ export default function FirstScreen({navigation}){
                     <TouchableOpacity style={styles.icon1}>
                  
                         <Image 
-                            source={require('../assets/fb_logo.png')} resizeMode='contain' 
-                             style={{marginRight:-1,alignSelf:'center',width:45,height:42}} />
+                            source={require('../assets/fb_logo.png')} resizeMode='cover' 
+                             style={{width:'70%',height:'85%'}} />
                    
                     </TouchableOpacity>
-
 
                     <TouchableOpacity style={styles.icon2}>
 
                         <Image 
                             source={require('../assets/email_logo.png')} resizeMode='contain' 
-                            style={{marginRight:-1,alignSelf:'center',height:42}} />
+                            style={{width:'90%',height:'90%'}} />
 
                     </TouchableOpacity>
 
@@ -110,19 +84,18 @@ export default function FirstScreen({navigation}){
 
                         <Image 
                             source={require('../assets/in_logo.png')} resizeMode='contain' 
-                            style={{marginRight:-1,alignSelf:'center',height:42}} />
+                            style={{width:'90%',height:'90%'}} />
 
                     </TouchableOpacity>
+
                 </View>
 
-    
+  
             </View>
 
           
-
         </View>
         
-
 
     )
 }
