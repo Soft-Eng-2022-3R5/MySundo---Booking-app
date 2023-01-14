@@ -41,7 +41,9 @@ export default function FirstScreen({navigation}){
                 <Text style={styles.fontstyle1}>Welcome to my SUNDO!</Text>
                 <Text style={styles.fontstyle2}>Looking for a way to get around town? we've got you covered.</Text>
                 
-                <TouchableOpacity style={styles.SignUpbutton}>
+                <TouchableOpacity style={styles.SignUpbutton}
+                    onPress={()=>{navigation.navigate('SUscreen1')}}
+                > 
 
                     <Text style={styles.signupfont}>SIGNUP</Text>
 

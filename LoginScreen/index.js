@@ -1,9 +1,11 @@
-import { View,Text, Image, TouchableOpacity,StatusBar,TextInput,Alert} from "react-native"
+import { View,Text, Image, TouchableOpacity,StatusBar,TextInput,Alert, Dimensions} from "react-native"
 import { React,useState } from "react"
 import { styles } from "./styles";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CarouselComponent from "../Components/CarouselComponents";
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function LoginScreen({navigation}){
 
@@ -34,6 +36,7 @@ export default function LoginScreen({navigation}){
       }
     
       console.log(email)
+
    
     return(
    
@@ -54,7 +57,9 @@ export default function LoginScreen({navigation}){
                   
             <View style={styles.backbutton}>
 
-                <TouchableOpacity onPress={()=>{navigation.navigate('FirstScreen');}}> 
+                <TouchableOpacity onPress={()=>{navigation.navigate('FirstScreen');}}
+                    style={{top:5}}
+                    > 
                     <Icon name={'arrow-left'} size={42} color={'white'} />
                 </TouchableOpacity >
 
@@ -68,7 +73,7 @@ export default function LoginScreen({navigation}){
                 <Text style={styles.fontstyle1}>LOGIN YOUR ACCOUNT</Text>
              
                 
-                <View style={{marginTop:'7%'}}>
+                <View style={styles.test}>
 
                     {/* kani na part ang input text */}
                      <TextInput
@@ -80,12 +85,10 @@ export default function LoginScreen({navigation}){
                         onChangeText = {setEmail}
                         onFocus={() => handleInputFocus('entry1')}
                          onBlur={() => handleInputBlur('entry1')}
-
                          
                         />
-                  </View>
+                
 
-                  <View style={{alignSelf:'center',flexDirection:'row'}}>
                     <TextInput
 
                         style={isFocused.entry2 ? [styles.textinputstyle, 
@@ -98,8 +101,7 @@ export default function LoginScreen({navigation}){
                         onBlur={() => handleInputBlur('entry2')}
                         />
                        
-
-                    <TouchableOpacity style={{position:'absolute',marginLeft:'61%',paddingTop:6}}
+                    <TouchableOpacity style={{  top:'-32%',left:'77%',}}
                     
                     onPress={()=>{
 
@@ -111,20 +113,20 @@ export default function LoginScreen({navigation}){
                     >
                        
 
-                     <Icon name={passoption === false ? 'eye' : 'eye-off-outline'} size={20} color={'#7A7A7A'}/>
-          
+                             <Image
+                            style={styles.eyestyle}
+                            
+                            source={passoption === false? require('../assets/eye_open.png') : require('../assets/eye_close.png')}
+                            resizeMode='cover'
+                            />
+                     
                     </TouchableOpacity>
                 </View>
-
-                        
-
-    {/* //flexDirection:'row' */}
-
 
                 <TouchableOpacity style={styles.Loginbutton} onPress={()=>{
 
                         if(email == email1 && password == password1){
-                            Alert.alert('Login Successfully','Cridentials are all correct!..',[
+                            Alert.alert('Login Successfully','The credential you entered is all correct!',[
                                 {text:'close', onPress: () => console.log('alert closed')},
                             
                             ]);
@@ -140,31 +142,41 @@ export default function LoginScreen({navigation}){
                                 
                         } 
                         
-
                 }}>
                     
                     <Image 
-                        source={require('../assets/button.png')} resizeMode='contain' 
+                        source={require('../assets/button.png')} resizeMode='cover' 
                         style={styles.sample} />
 
-                    <Text style={{textAlign: 'center',top:-35,
-                                fontSize:20,fontFamily:'Roboto',
-                                fontWeight:'bold',color:'white'}}>LOGIN</Text>
+                    <Text style={styles.loginfont}>LOGIN</Text>
                 </TouchableOpacity>
 
 
-                <Text style={styles.fontstyle4}>Forgot the password?
+                <View style={{ top:'-2%',flexDirection:'row'}}>
+                     <Text style={styles.fontstyle4}>Forgot the password?
+                
+                    </Text>
 
-
-                    <TouchableOpacity onPress={()=>{navigation.navigate('Screen1');}}>
-
-                        <Text style={{color:'#438EFF',top:4,}}>  click here</Text>
+                    <TouchableOpacity onPress={()=>{navigation.navigate('Screen1');}}
+                        style={{alignContent:'center'}}
+                    >      
+                        <Text style={styles.clickherestyle}>  click here</Text>
 
                     </TouchableOpacity>
+                </View>
 
-                </Text>
+                <View style={styles.signuphere_nav}>
+                     <Text style={styles.fontstyle4}>Don’t have an account yet?
+                
+                    </Text>
 
+                    <TouchableOpacity onPress={()=>{navigation.navigate('SUscreen1');}}
+                        style={{alignContent:'center'}}
+                    >      
+                        <Text style={styles.clickherestyle}>  Signup here</Text>
 
+                    </TouchableOpacity>
+                </View>
 
                 <View style={styles.line}/>
                 <Text style={styles.fontstyle3}>or connect using</Text>
@@ -174,17 +186,16 @@ export default function LoginScreen({navigation}){
                     <TouchableOpacity style={styles.icon1}>
                  
                         <Image 
-                            source={require('../assets/fb_logo.png')} resizeMode='contain' 
-                             style={{marginRight:-1,alignSelf:'center',width:45,height:42}} />
+                            source={require('../assets/fb_logo.png')} resizeMode='cover' 
+                             style={{width:'70%',height:'85%'}} />
                    
                     </TouchableOpacity>
-
 
                     <TouchableOpacity style={styles.icon2}>
 
                         <Image 
                             source={require('../assets/email_logo.png')} resizeMode='contain' 
-                            style={{marginRight:-1,alignSelf:'center',height:42}} />
+                            style={{width:'90%',height:'90%'}} />
 
                     </TouchableOpacity>
 
@@ -192,21 +203,14 @@ export default function LoginScreen({navigation}){
 
                         <Image 
                             source={require('../assets/in_logo.png')} resizeMode='contain' 
-                            style={{marginRight:-1,alignSelf:'center',height:42}} />
+                            style={{width:'90%',height:'90%'}} />
 
                     </TouchableOpacity>
 
-
-                   
                 </View>
 
-                <View style={{top:80}}>
-                    <Text style={styles.fontstyle4}>Don't have an account yet?
-                        <TouchableOpacity>
-                            <Text style={{color:'#438EFF',top:4, fontSize:12}}>  Sign up here</Text>
-                        </TouchableOpacity>
-                        </Text>
-                </View>
+
+                
             </View>
 
           
