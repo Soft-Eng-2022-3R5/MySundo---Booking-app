@@ -1,4 +1,5 @@
 import { StyleSheet,Dimensions } from "react-native";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -9,7 +10,7 @@ export const styles = StyleSheet.create({
 container:{
     flex:1,
     backgroundColor: 'white',
-    flexDirection:'column'
+    //flexDirection:'column'
 },
 
 bgstyle:{
@@ -37,28 +38,27 @@ flexDirection:'row',
 },
 
 Logo:{
-fontFamily:'Roboto',
-fontWeight:'bold',
-fontSize:27,
-color:'white',
-paddingLeft:10,
-top:5,
-textShadowColor: 'black',
-textShadowOffset: {width: 0, height: 1},
-textShadowRadius: 10
+    fontFamily:'Roboto',
+    fontWeight:'bold',
+    fontSize:RFValue(27,680),
+    color:'white',
+    paddingLeft:10,
+    top:5,
+    textShadowColor: 'black',
+    textShadowOffset: {width: 0, height: 1},
+    textShadowRadius: 10
 
 },
-
 
 pannel1:{
     flex:1,
     position: 'absolute',
+    alignItems:'center',
     backgroundColor: 'white',
-    width: '100%',
-    height: windowHeight/2.1,
+    width: '90%',
+    height: windowHeight/1.8,
     alignSelf: 'center',
-    marginLeft:'30%',
-    top:'30%',
+    top: '31%',
     borderRadius: 20,
     shadowRadius: 1,
     elevation: 5,
@@ -66,7 +66,7 @@ pannel1:{
 },
 fontstyle1:{
     textAlign:'center',
-    fontSize: 20,
+    fontSize: RFValue(20,680),
     fontWeight:'700',
     fontFamily: 'Roboto',
     paddingTop: 30,
@@ -75,11 +75,11 @@ fontstyle1:{
 fontstyle3:{
     textAlign: 'center',
     alignSelf:'center',
-    fontSize: 14,
+    fontSize: RFValue(14,680),
     fontFamily: 'Roboto',  
-    top:37,
+    top:'-2%',
     backgroundColor:'white',
-    width:120,
+    width:windowWidth/3,
     
    },
 
@@ -97,96 +97,116 @@ SignUpbutton:{
 },
 
 Loginbutton:{
-    alignSelf:'center',
-    backgroundColor:'white',
-    borderWidth:2,
-    borderColor:'white',
-    width:160,
-    height:40,
+    //alignSelf:'center',
+    //backgroundColor:'red',
+    //alignItems:'center',
+    width:windowWidth/2,
+    height:'11%',
+    top:'-7%',
+    //marginBottom:'5%',
     borderRadius:10,
      
 },
 
 sample:{
-    alignSelf:'center',
-    width:160,
-    height:40,
+    width:'100%',
+    height:'100%',
     borderRadius:10,
 
 },
+
+loginfont:{
+    textAlign: 'center',top:'-85%',
+    fontSize:RFValue(20,680),fontFamily:'Roboto',
+    fontWeight:'bold',color:'white'
+},
+
 line:{
-    top:47,
-    borderColor:'#A9A9A9',
-    borderWidth:0.4,
+    top:'1%',
+    width:'80%',
+    borderColor:'#d9d9d9',
+    borderWidth:1,
     marginLeft:'10%',
     marginRight:'10%',
 },
 
 container2:{
-    flex:1,
+
     position:'absolute',
-    alignSelf:'center',
-    height:50,
-    top:315,
-    width:200,
+    height:windowHeight/14,
+    top:windowHeight/2.34,
+    width:'70%',
+    alignItems:'stretch',
     flexDirection:'row',
-    alignItems:'center',
     justifyContent:'space-around',
+  
     
 },
 
 icon1:{
    
-   
-    height:40,
-    width: 40,
-    borderRadius:100,
-
+    height:'100%',
+    width: '25%',
 },
 
 icon2:{
-    
-    
-    height:40,
-    width: 40,
-    margin:'10%',
-    borderRadius:100,
+
+    height:'100%',
+    width: '25%',
 
 },
 
 icon3:{
     
-    height:40,
-    width: 40, 
-    borderRadius:100,
-
+    height:'100%',
+    width: '25%',
 },
 
+test:{
+    marginTop:'5%',
+    width:'90%',
+    height:windowHeight/5,
+},
 
 textinputstyle:{
     
     alignSelf:'center',
-    height:35,
-    width:windowWidth-140,
+    height:windowHeight/20,
+    width:'80%',
     borderColor:'#d9d9d9',
     borderRadius:5,
     borderWidth:1,
     marginBottom:'5%',
     paddingStart:10,
     paddingEnd:10,
-
+    fontSize: RFValue(12,680),
 
 },
 
 fontstyle4:{
-    textAlign: 'center',
-    alignSelf:'center',
-    fontSize: 12,
-    fontFamily: 'Roboto',  
-    top:20,
-    //backgroundColor:'white',
-    //width:400,
-    
+    fontSize: RFValue(12,680),
+    fontFamily: 'Roboto',   
    },
+
+clickherestyle:{
+    fontSize: RFValue(12,680),
+    fontFamily: 'Roboto',  
+    color:'#438EFF',
+    fontWeight:'500',
+
+   },
+
+eyestyle:{
+    
+    width:windowWidth/15,
+    height:windowHeight/30,
+   },
+
+signuphere_nav:{
+    top:windowHeight/8,
+    flexDirection:'row',
+
+
+},
 
 })
