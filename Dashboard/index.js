@@ -28,12 +28,8 @@ export default function Dashboard({navigation}){
 
                 <TouchableOpacity style={styles.menubutton} onPress={()=>{
                     
-                   
-         
-
-
-
-
+                        navigation.navigate('Drawer')
+        
                 }}>
                 
 

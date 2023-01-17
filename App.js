@@ -10,8 +10,23 @@ import Screen3 from './ResetPassword/Screen3';
 import SUscreen1 from './SignupScreen/SUscreen1';
 import SUscreen2 from './SignupScreen/SUscreen2';
 import BookScreen1 from './BookingScreen/BookScreen1';
+import ProfileScreen from './ProfileScreen';
 
-const Drawer = createDrawerNavigator();
+export const DrawerNavigation = () => {
+
+  const Drawer = createDrawerNavigator()
+  
+  return (
+
+    <Drawer.Navigator>
+
+      <Drawer.Screen name="ProfileScreen" component={ProfileScreen}/>
+
+    </Drawer.Navigator>
+
+  )
+  }
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -43,6 +58,8 @@ return(
                                  backgroundColor:'#25FFC4', 
                         
                       }}} name='BookScreen1' component={BookScreen1}/>
+        <Stack.Screen name='Drawer' component={DrawerNavigation}/>
+        
     </Stack.Navigator>
 
 </NavigationContainer>
