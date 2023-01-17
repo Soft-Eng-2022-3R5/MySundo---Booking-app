@@ -12,9 +12,12 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { FlatList } from "react-native-gesture-handler";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import axios from "../../plugin/axios";
+import urid from 'urid';
 
+export default function SUscreen2({navigation,route}){
 
-export default function SUscreen2({navigation}){
+let useremail_password=route.params;
 
 const[datedisplay, setDatedisplay] = useState ('Birthdate');
 const [date, setDate] = useState(new Date());    
@@ -131,6 +134,9 @@ const [gender,setGender] = useState ('');
 const [age,setAge] = useState ('');
 const [weight,setWeight] = useState ('');
 const [cellnum,setCellnum] = useState ('');
+
+
+
     return(
         
         <SafeAreaView style={styles.containter}>
@@ -255,7 +261,7 @@ const [cellnum,setCellnum] = useState ('');
                                     <TouchableOpacity style={styles.renderItem} onPress={()=>{
                                         setSelectedCity(item.city);
                                         onSearch1('');
-                                        Setprovince(item.city)
+                                        Setcity(item.city)
                                         Setminiplaceholder5(' City ')
                                         setIsclicked1(false);
                                         setTextcolor1('black')
@@ -273,8 +279,6 @@ const [cellnum,setCellnum] = useState ('');
                 </View>
                 
                        
-
-
             <View style={styles.container3}>
                 
                 
@@ -341,7 +345,49 @@ const [cellnum,setCellnum] = useState ('');
                             }}
                         />
                         <Text style={styles.miniplaceholder}>{miniplaceholder10}</Text>
-                    </View>
+
+                
+            </View>
+            
+            <TouchableOpacity style={styles.Loginbutton} onPress={()=>{
+
+                          axios.post('/api/insert.php', {
+
+                                user_id:urid(6,'num'),
+                                email:useremail_password.email,
+                                password: useremail_password.password,
+                                first_name: fname,
+                                last_name: lname,
+                                home_address: homeaddress,
+                                province: province,
+                                city: city,
+                                gender: gender,
+                                birthdate: adlaw,
+                                age: age,
+                                weight: weight,
+                                cellphone_no: cellnum,
+               
+                          })
+                          .then(function (response) {
+                            
+                            console.log(response.data)
+                            console.log(cellnum)
+                            console.log(province)
+                            console.log(city)
+                            
+                          })
+                          .catch(function (error) {
+                            console.log(error)
+                          });
+                    }}>
+
+                    <Image 
+                    source={require('../../assets/button.png')} resizeMode='cover' 
+                    style={styles.sample} />
+
+                <Text style={styles.loginfont}>COMPLETE</Text>
+            </TouchableOpacity>
+
 
             {show && (
                 <DateTimePicker
