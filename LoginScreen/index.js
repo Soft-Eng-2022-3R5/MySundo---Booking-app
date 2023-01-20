@@ -3,6 +3,7 @@ import { React,useState } from "react"
 import { styles } from "./styles";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CarouselComponent from "../Components/CarouselComponents";
+import axios from "../plugin/axios";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -34,10 +35,10 @@ export default function LoginScreen({navigation}){
           [textinput]: false
         })
       }
-    
-      console.log(email)
 
-   
+      const [session, setSession] = useState('');
+      const [test101, setTest101] = useState([{"Message": "wrong password"}])
+ 
     return(
    
         <View style={styles.container}>
@@ -112,7 +113,6 @@ export default function LoginScreen({navigation}){
                     
                     >
                        
-
                              <Image
                             style={styles.eyestyle}
                             
@@ -125,22 +125,34 @@ export default function LoginScreen({navigation}){
 
                 <TouchableOpacity style={styles.Loginbutton} onPress={()=>{
 
-                        if(email == email1 && password == password1){
-                            Alert.alert('Login Successfully','The credential you entered is all correct!',[
+                        axios.post('/api/auth.php', {
+                            email: email,
+                            password: password,
+                          })
+                          .then(function (response) {
+                   
+                            if(response.data[0].Message === "wrong password"){
+                                Alert.alert('Login Failed','Your email or password is incorrect Please try again.',[
+                                    {text:'close', onPress: () => console.log('alert closed')},
+                                
+                                ]);
+                           }
+                           else if(response.data[0].Message === "No account yet"){
+                            Alert.alert('No Account Registered','The credential you entered is not found in our system!',[
                                 {text:'close', onPress: () => console.log('alert closed')},
                             
                             ]);
+                           }
+                           else if(response.data[0].Message === "Success"){
+
+                                navigation.navigate('Dashboard')
                             
-                           
-                        }
-                        else if(email != email1 || password != password1){
-                            Alert.alert('Login Failed','Your email or password is incorrect Please try again.',[
-                                {text:'close', onPress: () => console.log('alert closed')},
+                           }
                             
-                            ]);
-                                
-                                
-                        } 
+                          })
+                          .catch(function (error) {
+                            console.log(error)
+                          });
                         
                 }}>
                     
@@ -209,15 +221,11 @@ export default function LoginScreen({navigation}){
 
                 </View>
 
-
-                
             </View>
 
-          
-
+        
         </View>
         
-
 
     )
 }

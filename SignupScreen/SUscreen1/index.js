@@ -2,10 +2,8 @@ import { View,Text, Image, TouchableOpacity,StatusBar,TextInput,Alert, Dimension
 import { React,useState } from "react"
 import { styles } from "./styles";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import axios from '../../plugin/axios';
 
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 export default function SUscreen1({navigation}){
 
@@ -21,7 +19,7 @@ export default function SUscreen1({navigation}){
     const [isFocused, setIsFocused] = useState({
         entry1: false,
         entry2: false,
-        entry2: true,
+        entry3: false,
     })
     
     const handleInputFocus = (textinput) => {
@@ -34,8 +32,10 @@ export default function SUscreen1({navigation}){
           [textinput]: false
         })
       }
+      
+let userinputed = {email:email,password:password};
     
-      console.log(email)
+
 
    
     return(
@@ -90,7 +90,7 @@ export default function SUscreen1({navigation}){
                         style={isFocused.entry2 ? [styles.textinputstyle, 
                               { borderColor: '#438EFF' }] : styles.textinputstyle}
                         placeholder="Password"
-                        value={password}
+                        
                         onChangeText = {setPassword}
                         secureTextEntry={showpass}                    
                         onFocus={() => handleInputFocus('entry2')}
@@ -102,7 +102,7 @@ export default function SUscreen1({navigation}){
                         style={isFocused.entry3 ? [styles.textinputstyle, 
                               { borderColor: '#438EFF' }] : styles.textinputstyle}
                         placeholder="Re-enter Password"
-                        value={password1}
+                        
                         onChangeText = {setPassword1}
                         secureTextEntry={showpass1}                    
                         onFocus={() => handleInputFocus('entry3')}
@@ -148,24 +148,22 @@ export default function SUscreen1({navigation}){
 
                 <TouchableOpacity style={styles.Loginbutton} onPress={()=>{
 
-                        if(password == password1){
-                            // Alert.alert('Login Successfully','The credential you entered is all correct!',[
-                            //     {text:'close', onPress: () => console.log('alert closed')},
-                            
-                            // ]);
+                
+                        // axios({
+                        //     method: 'post',
+                        //     url: 'http://192.168.1.63:80/api/auth.php',
+                        //     data: {
+                        //         //user_id:'0005',
+                        //         email:'jordan@idolo.com',
+                        //         password: 'jordanidolo',
+                        //         //first_name: 'michael jordan',
 
-                            navigation.navigate('SUscreen2')
-                            
-                           
-                        }
-                        else if( password != password1){
-                            Alert.alert('Login Failed','Your email or password is incorrect Please try again.',[
-                                {text:'close', onPress: () => console.log('alert closed')},
-                            
-                            ]);
-                                
-                                
-                        } 
+                        //     }
+                        //   });
+                        navigation.push("SUscreen2",userinputed)
+
+
+
                         
                 }}>
                     

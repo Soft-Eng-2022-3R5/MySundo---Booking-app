@@ -172,6 +172,31 @@ datefont:{
     top:'23%'
 },
 
+loginfont:{
+    textAlign: 'center',top:'-60%',
+    fontSize:RFValue(22,680),fontFamily:'Roboto',
+    fontWeight:'bold',color:'white'
+},
+
+Loginbutton:{
+    //alignSelf:'center',
+    //backgroundColor:'red',
+    //alignItems:'center',
+    width:'85%',
+    height:'11%',
+    top:'5%',
+    //marginBottom:'5%',
+    borderRadius:10,
+     
+},
+
+sample:{
+    width:'100%',
+    height:'70%',
+    borderRadius:10,
+
+},
+
 
 
 })
