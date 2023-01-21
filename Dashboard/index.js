@@ -4,9 +4,14 @@ import { View,Text,ScrollView,Image,TextInput, TouchableOpacity} from "react-nat
 import { styles } from "./style"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
+import { useContext } from 'react';
+import { AuthenticationContext } from '../AuthContext';
+
+
 export default function Dashboard({navigation}){
 
-   
+
+    const {user} = useContext(AuthenticationContext);
 
     return(
 
@@ -23,16 +28,15 @@ export default function Dashboard({navigation}){
                         resizeMode='contain'
                     />
 
-                <Text style={styles.textstyle1}>Hello, Peter Francis</Text>
+                <Text style={styles.textstyle1}>Hello, {user}</Text>
                 <Text style={styles.textstyle2}>Have a nice Day!</Text>
 
                 <TouchableOpacity style={styles.menubutton} onPress={()=>{
                     
-                        navigation.navigate('Drawer')
-        
+                        navigation.openDrawer()
+                    
                 }}>
                 
-
                 <Feather name={'menu'} size={40} color={'black'} 
                     style={{position:'absolute',alignSelf:'flex-end',top:"10%",}} />
 
@@ -79,7 +83,7 @@ export default function Dashboard({navigation}){
             
             <Text style={styles.textstyle4}> BOOK FOR LATER</Text>
                 
-                <TouchableOpacity style={styles.selectbutton}>
+                <TouchableOpacity style={styles.selectbutton} onPress={()=>{navigation.navigate('BookScreen2')}}>
                     <Text style={{fontFamily:'Roboto',fontWeight:'bold',textAlign:'center'}}>SELECT</Text>
                 </TouchableOpacity>
 
@@ -88,37 +92,16 @@ export default function Dashboard({navigation}){
                 
                  <Text style={styles.textstyle4}> BOOK FOR SOMEONE</Text>
                 
-                <TouchableOpacity style={styles.selectbutton}>
+                <TouchableOpacity style={styles.selectbutton} onPress={()=>{navigation.navigate('BookScreen3')}}>
                     <Text style={{fontFamily:'Roboto',fontWeight:'bold',textAlign:'center'}}>SELECT</Text>
                 </TouchableOpacity>
-
 
 
             </View>
               
             </ScrollView> 
 
-            <View style={styles.navbar}>
-                
-            
-            
-                <TouchableOpacity style={styles.chatbutton}>
-                    <MaterialCommunityIcons name={'android-messages'} size={30} color={'#D6D6D6'} 
-                        style={{alignSelf:'center',top:'20%'}} />
-                </TouchableOpacity>
-                    
-
-                <TouchableOpacity style={styles.chatbutton}>
-                    <MaterialCommunityIcons name={'home'} size={30} color={'black'} 
-                        style={{alignSelf:'center',top:'20%'}} />
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.booklistbutton}>
-                    <Feather name={'list'} size={30} color={'#D6D6D6'} 
-                            style={{alignSelf:'center',top:'20%'}} />
-                </TouchableOpacity>
-                          
-            </View> 
+           
 
        </View>
 

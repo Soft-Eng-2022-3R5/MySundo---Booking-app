@@ -18,7 +18,6 @@ containter:{
 },
 
 
-
 navbar:{
 
     backgroundColor:'white',
@@ -26,7 +25,8 @@ navbar:{
     height:'8%',
     alignSelf:'flex-end',
     flexDirection:'row',
-    justifyContent:'space-around'
+    justifyContent:'space-around',
+
 
 },
 
@@ -51,8 +51,6 @@ booklistbutton:{
     height:'80%',
     alignSelf:'center',
 },
-
-
 
 pannel1:{
 

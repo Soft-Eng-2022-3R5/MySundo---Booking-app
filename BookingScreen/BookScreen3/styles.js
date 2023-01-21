@@ -13,7 +13,6 @@ container1:{
     windowWidth:'100%',
     backgroundColor:'white'
 
-
 },
 locationicon:{
 
@@ -235,7 +234,6 @@ fontstyle8:{
     left:'5%',
 
 },
-
 
 
 bookbutton:{

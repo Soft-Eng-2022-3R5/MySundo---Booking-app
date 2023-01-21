@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Feather from 'react-native-vector-icons/Feather';
 import { styles } from "./styles"
 
-export default function BookScreen1({navigation}){
+export default function BookScreen3({navigation}){
 
 const [bordercolor,setBordercolor] = useState('#f9feff');
 const [bordercolor1,setBordercolor1] = useState('#f9feff');
@@ -78,7 +78,7 @@ const [bordercolor1,setBordercolor1] = useState('#f9feff');
                 source={require('../../assets/Clock.png')} resizeMode='contain'/>
             
             
-                <Text style={styles.fontstyle4}>Now</Text>
+                <Text style={styles.fontstyle4}>00/00/000</Text>
             
 
             </View>
@@ -156,8 +156,6 @@ const [bordercolor1,setBordercolor1] = useState('#f9feff');
                         <Text style={styles.textstylebutton}>BOOK</Text>
                 </TouchableOpacity>
 
-
-                
 
         </View>
 

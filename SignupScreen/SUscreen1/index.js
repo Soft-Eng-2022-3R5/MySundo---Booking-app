@@ -36,8 +36,6 @@ export default function SUscreen1({navigation}){
 let userinputed = {email:email,password:password};
     
 
-
-   
     return(
    
         <View style={styles.container}>

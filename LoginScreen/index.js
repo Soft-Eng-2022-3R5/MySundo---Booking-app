@@ -4,11 +4,18 @@ import { styles } from "./styles";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CarouselComponent from "../Components/CarouselComponents";
 import axios from "../plugin/axios";
+import { useContext } from "react";
+import { AuthenticationContext } from "../AuthContext";
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function LoginScreen({navigation}){
+
+    const {loginRequest} = useContext(AuthenticationContext);
+
+
 
     const [passoption,setPassoption] = useState(false)
     const [showpass,setShowpass] = useState(true)
@@ -125,34 +132,7 @@ export default function LoginScreen({navigation}){
 
                 <TouchableOpacity style={styles.Loginbutton} onPress={()=>{
 
-                        axios.post('/api/auth.php', {
-                            email: email,
-                            password: password,
-                          })
-                          .then(function (response) {
-                   
-                            if(response.data[0].Message === "wrong password"){
-                                Alert.alert('Login Failed','Your email or password is incorrect Please try again.',[
-                                    {text:'close', onPress: () => console.log('alert closed')},
-                                
-                                ]);
-                           }
-                           else if(response.data[0].Message === "No account yet"){
-                            Alert.alert('No Account Registered','The credential you entered is not found in our system!',[
-                                {text:'close', onPress: () => console.log('alert closed')},
-                            
-                            ]);
-                           }
-                           else if(response.data[0].Message === "Success"){
-
-                                navigation.navigate('Dashboard')
-                            
-                           }
-                            
-                          })
-                          .catch(function (error) {
-                            console.log(error)
-                          });
+                       loginRequest(email,password);
                         
                 }}>
                     
