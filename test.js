@@ -1,13 +1,18 @@
-import React from "react"
-import { useState } from "react"
+import React from "react";
+import { Appnav,Account } from "./App";
 import { useContext } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { AuthenticationContext } from "./AuthContext";
 
+export default function Loginchecker() {
 
-export default function Loginchecker(props) {
-
-    const {loginaccess1,setLoginaccess1} = useState();  
-
+    const {loginaccess} = useContext(AuthenticationContext)
     return(
-        setLoginaccess1(true)
+       
+        <NavigationContainer>  
+
+            {loginaccess ? <Appnav/>: <Account/>}
+        
+        </NavigationContainer>
     )
 }

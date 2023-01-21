@@ -21,14 +21,13 @@ import BookScreen3 from './BookingScreen/BookScreen3';
 import MapScreen from './BookingScreen/mapscreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useContext } from 'react';
-//import { littleData } from './Data';
+import Loginchecker from './test';
 
 const MessageScreen = () => null;
 const BooklistScreen = () => null;
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
-
 
 
 
@@ -41,15 +40,7 @@ return(
 
   <AuthenticationProvider>
     
-        <NavigationContainer>
-        
-        
-        {true ? <Appnav/>: <Account/>}
-        
-       
-
-        </NavigationContainer>
-
+        <Loginchecker/>
 
   </AuthenticationProvider>
 
@@ -57,7 +48,7 @@ return(
 
 }
 
-const Account = () => {
+export const Account = () => {
   return(
   <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen  name='FirstScreen' component={FirstScreen}/>
@@ -122,7 +113,7 @@ const screenOptionstabnav = ({ route }) => {
   };
 };
 
-const Appnav = () => {
+export const Appnav = () => {
 
   const Tab = createBottomTabNavigator();
 
@@ -219,6 +210,9 @@ const TellAfriend = () => <Icon name="share-social" size={20} />;
 const HelpAndFeedback = () => <Icon name="md-help-circle" size={20} />;
 
 const DrawerList = () => {
+
+  const {setLoginaccess} = useContext(AuthenticationContext)
+
   return (
     <DrawerContentScrollView>
       <View>
@@ -241,7 +235,7 @@ const DrawerList = () => {
         <DrawerItem label="About" icon={About} />
         <DrawerItem label="Coupons" icon={Coupons} />
         <DrawerItem label="Rider Safety" icon={RiderSafety} />
-        <DrawerItem label="Sign Out" icon={SignOut} />
+        <DrawerItem label="Sign Out" icon={SignOut} onPress={()=>{setLoginaccess(false)}}/>
       </View>
 
       <View style={{marginTop:'75%'}}>

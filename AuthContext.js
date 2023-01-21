@@ -7,7 +7,7 @@ export const AuthenticationContext = createContext ();
 
 export const AuthenticationProvider = ({children}) => {
 
-    const [user,setuser] = useState('');
+    const [user,setuser] = useState('Peter Francis');
     const [loginaccess,setLoginaccess] = useState(false)
 
 
@@ -50,7 +50,7 @@ export const AuthenticationProvider = ({children}) => {
     return(
 
   
-        <AuthenticationContext.Provider value={{loginRequest,user,loginaccess}}>
+        <AuthenticationContext.Provider value={{loginRequest,user,loginaccess,setLoginaccess}}>
             
             {children }
 

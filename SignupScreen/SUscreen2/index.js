@@ -370,10 +370,7 @@ const [cellnum,setCellnum] = useState ('');
                           })
                           .then(function (response) {
                             
-                            console.log(response.data)
-                            console.log(cellnum)
-                            console.log(province)
-                            console.log(city)
+                           navigation.navigate('LoginScreen')
                             
                           })
                           .catch(function (error) {
