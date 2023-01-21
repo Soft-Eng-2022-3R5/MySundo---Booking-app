@@ -4,11 +4,43 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import { styles } from "./styles"
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default function BookScreen1({navigation}){
+export default function BookScreen2({navigation}){
 
 const [bordercolor,setBordercolor] = useState('#f9feff');
 const [bordercolor1,setBordercolor1] = useState('#f9feff');
+
+const[datedisplay, setDatedisplay] = useState ('00/00/0000');
+const [date, setDate] = useState(new Date());    
+const [mode, setMode] = useState('date');
+const [show, setShow] = useState(false);
+const [text, setText] = useState("Empty");
+
+const onChange = (event, selectedDate) => {
+    setShow(!Platform.OS === 'android');
+    const currentDate = selectedDate || date;
+    setDate(currentDate);
+
+
+let tempDate = new Date(currentDate);
+let fDate = tempDate.getDate() + '/' + (tempDate.getMonth()+1) + '/' + tempDate.getFullYear();
+let fTime = tempDate.getHours() + ':' + tempDate.getMinutes();
+setText(fDate + '\n' + fTime)
+setAdlaw(fDate)
+    //console.log(fDate + '('+ fTime + ')')
+    console.log(fDate)
+    setDatedisplay(fDate)
+    setOras(fTime)
+}
+
+const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+}
+
+const [adlaw, setAdlaw] = useState();
+const [oras, setOras] = useState('00:00');
 
     return(
     
@@ -78,9 +110,35 @@ const [bordercolor1,setBordercolor1] = useState('#f9feff');
                 source={require('../../assets/Clock.png')} resizeMode='contain'/>
             
             
-                <Text style={styles.fontstyle4}>Now</Text>
-            
+                {/* <Text style={styles.fontstyle4}>00/00/000</Text> */}
 
+                <TouchableOpacity style = {styles.datestyle} 
+                    onPress = {()=>{ showMode('date')}}
+                >
+                                
+                        <Text style={styles.fontstyle4}>{datedisplay}</Text>
+                      
+                </TouchableOpacity>
+
+                <TouchableOpacity style = {styles.timestyle} 
+                    onPress = {()=>{ showMode('time')}}
+                >
+                                
+                        <Text style={styles.fontstyle4}> {oras}</Text>
+                      
+                </TouchableOpacity>
+
+                {show && (
+                <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display='default'
+                onChange={onChange}
+                />
+    
+                )}
             </View>
 
             <View style={styles.line2}/>
@@ -150,14 +208,12 @@ const [bordercolor1,setBordercolor1] = useState('#f9feff');
                 <Text style={styles.fontstyle8}>TOTAL: 00.00</Text>
 
 
-                <TouchableOpacity style={styles.bookbutton}>
+                <TouchableOpacity style={styles.bookbutton} onPress={()=>{navigation.goBack()}}>
                     <Image style={styles.bookbuttonstyle}
                     source={require('../../assets/button.png')} resizeMode='cover'/>
                         <Text style={styles.textstylebutton}>BOOK</Text>
                 </TouchableOpacity>
 
-
-                
 
         </View>
 

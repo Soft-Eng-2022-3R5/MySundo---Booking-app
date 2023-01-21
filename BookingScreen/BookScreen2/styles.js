@@ -13,7 +13,6 @@ container1:{
     windowWidth:'100%',
     backgroundColor:'white'
 
-
 },
 locationicon:{
 
@@ -133,11 +132,11 @@ icon2:{
 },
 
 icon3:{
-
+    position:'absolute',
     width:'10%',
-    height:'40%',
+    height:'5%',
     marginTop:'6.5%',
-    left:'172%'
+    left:'52%'
 },
 
 line2:{
@@ -165,9 +164,28 @@ fontstyle3:{
 },
 
 fontstyle4:{
-    fontSize:RFValue(15,680),
-    top:'7.2%',
-    left:'180%',
+    fontSize:RFValue(13,680),
+    top:'10%',
+    fontWeight:'bold',
+    //left:windowWidth/3.6,
+},
+
+datestyle:{
+    position:'absolute',
+    width:'22%',
+    height:'40%',
+    top:'37%',
+    left:'62%',
+    //backgroundColor:'red'
+},
+
+timestyle:{
+    position:'absolute',
+    width:'19%',
+    height:'40%',
+    top:'37%',
+    left:'83%',
+    //backgroundColor:'yellow'
 },
 
 fontstyle5:{
@@ -235,8 +253,6 @@ fontstyle8:{
     left:'5%',
 
 },
-
-
 
 bookbutton:{
 

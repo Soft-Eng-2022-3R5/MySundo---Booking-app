@@ -6,7 +6,7 @@ import { styles } from "./styles";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = '50%';
 
-const imageslide = [
+const imageslide = [ 
 
     <Image
     style={styles.imagestyle}
@@ -47,7 +47,7 @@ return(
         width={windowWidth}
         height={windowHeight}
         autoPlay
-        scrollAnimationDuration={2500}
+        scrollAnimationDuration={2500}      
         data={imageslide}
         renderItem={({ index }) => {
         return imageslide[index];
