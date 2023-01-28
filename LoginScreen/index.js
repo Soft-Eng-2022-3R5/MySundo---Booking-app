@@ -14,7 +14,7 @@ const windowHeight = Dimensions.get('window').height;
 export default function LoginScreen({navigation}){
 
     const {loginRequest} = useContext(AuthenticationContext);
-
+    const validregex =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 
     const [passoption,setPassoption] = useState(false)
@@ -132,7 +132,11 @@ export default function LoginScreen({navigation}){
 
                 <TouchableOpacity style={styles.Loginbutton} onPress={()=>{
 
-                       loginRequest(email,password);
+                        {email.match(validregex)?loginRequest(email,password):
+                            Alert.alert('Invalid email','Please make sure your email is valid.',[
+                                {text:'close', onPress: () => console.log('alert closed')},
+                            ]);
+                        }
                         
                 }}>
                     

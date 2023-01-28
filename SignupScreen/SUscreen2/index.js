@@ -47,7 +47,7 @@ const showMode = (currentMode) => {
     setMode(currentMode);
 }
 
-const [adlaw, setAdlaw] = useState();
+const [adlaw, setAdlaw] = useState('');
 
 const provinces= [
 
@@ -351,31 +351,49 @@ const [cellnum,setCellnum] = useState ('');
             
             <TouchableOpacity style={styles.Loginbutton} onPress={()=>{
 
+                        if(fname==='' || lname ==='' ||homeaddress === ''|| province === '' || city === ''
+                            || gender === '' || age === '' || weight === '' || cellnum === ''|| adlaw === ''){
+                                
+                                Alert.alert('Registration failed','Please make sure to fill up all the information.',[
+                                    {text:'close', onPress: () => console.log('alert closed')},
+                                
+                                ]);
+                            }
+                        
+                        else if(cellnum.length < 9){
+                            Alert.alert('Invalid cellphone no.','Please make sure your cellphone number is valid.',[
+                                {text:'close', onPress: () => console.log('alert closed')},
+                            
+                            ]);
+                        }
+                        else{
+                            
                           axios.post('/api/insert.php', {
 
-                                user_id:urid(6,'num'),
-                                email:useremail_password.email,
-                                password: useremail_password.password,
-                                first_name: fname,
-                                last_name: lname,
-                                home_address: homeaddress,
-                                province: province,
-                                city: city,
-                                gender: gender,
-                                birthdate: adlaw,
-                                age: age,
-                                weight: weight,
-                                cellphone_no: cellnum,
-               
-                          })
-                          .then(function (response) {
-                            
-                           navigation.navigate('LoginScreen')
-                            
-                          })
-                          .catch(function (error) {
-                            console.log(error)
-                          });
+                            // user_id:urid(6,'num'),
+                            email:useremail_password.email,
+                            password: useremail_password.password,
+                            first_name: fname,
+                            last_name: lname,
+                            home_address: homeaddress,
+                            province: province,
+                            city: city,
+                            gender: gender,
+                            birthdate: adlaw,
+                            age: age,
+                            weight: weight,
+                            cellphone_no: cellnum,
+           
+                            })
+                            .then(function (response) {
+                            console.log(response.data)
+                            navigation.navigate('LoginScreen')
+                                
+                            })
+                            .catch(function (error) {
+                                console.log(error)
+                            });
+                        }
                     }}>
 
                     <Image 
