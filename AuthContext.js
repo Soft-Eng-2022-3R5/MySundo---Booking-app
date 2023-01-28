@@ -2,13 +2,19 @@
 import { useState } from "react";
 import { createContext } from "react";
 import axios from './plugin/axios'
+import { Alert } from "react-native";
 
 export const AuthenticationContext = createContext ();
 
 export const AuthenticationProvider = ({children}) => {
 
-    const [user,setuser] = useState('Peter Francis');
+  
     const [loginaccess,setLoginaccess] = useState(false)
+    const [userid, setUserid] = useState ('');
+    const [user_fname, setUser_fname] = useState ('');
+    const [user_lname, setUser_lname] = useState ('');
+    const [user_email, setUser_email] = useState ('');
+    const [paymentmethod,setPaymentmethod] = useState('cash')
 
 
     const loginRequest = (email,password) => {
@@ -17,7 +23,6 @@ export const AuthenticationProvider = ({children}) => {
 
             email: email,
             password: password,
-
 
           })
           .then(function (response) {
@@ -35,6 +40,23 @@ export const AuthenticationProvider = ({children}) => {
             ]);
            }
            else if(response.data[0].Message === "Success"){
+            
+            axios.post('/api/fetch.php', {
+
+                email: email,
+            
+              })
+              .then(function (response) {
+              
+               setUserid(response.data[0].user_id)
+               setUser_fname(response.data[0].first_name)
+               setUser_lname(response.data[0].last_name)
+               setUser_email(response.data[0].email)
+
+              })
+              .catch(function (error) {
+                console.log(error)
+              });
 
             setLoginaccess(true)
             
@@ -50,7 +72,8 @@ export const AuthenticationProvider = ({children}) => {
     return(
 
   
-        <AuthenticationContext.Provider value={{loginRequest,user,loginaccess,setLoginaccess}}>
+        <AuthenticationContext.Provider value={{loginRequest,loginaccess,setLoginaccess,
+        user_fname,user_lname,user_email,paymentmethod,setPaymentmethod,userid}}>
             
             {children }
 

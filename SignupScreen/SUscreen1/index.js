@@ -15,7 +15,8 @@ export default function SUscreen1({navigation}){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password1, setPassword1] = useState('');
-
+    const validregex =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    
     const [isFocused, setIsFocused] = useState({
         entry1: false,
         entry2: false,
@@ -76,7 +77,7 @@ let userinputed = {email:email,password:password};
                                { borderColor: '#438EFF' }] : styles.textinputstyle}
                         
                         placeholder="Email"
-                        
+                        value={email}
                         onChangeText = {setEmail}
                         onFocus={() => handleInputFocus('entry1')}
                          onBlur={() => handleInputBlur('entry1')}
@@ -88,7 +89,7 @@ let userinputed = {email:email,password:password};
                         style={isFocused.entry2 ? [styles.textinputstyle, 
                               { borderColor: '#438EFF' }] : styles.textinputstyle}
                         placeholder="Password"
-                        
+                        value={password}
                         onChangeText = {setPassword}
                         secureTextEntry={showpass}                    
                         onFocus={() => handleInputFocus('entry2')}
@@ -100,7 +101,7 @@ let userinputed = {email:email,password:password};
                         style={isFocused.entry3 ? [styles.textinputstyle, 
                               { borderColor: '#438EFF' }] : styles.textinputstyle}
                         placeholder="Re-enter Password"
-                        
+                        value={password1}
                         onChangeText = {setPassword1}
                         secureTextEntry={showpass1}                    
                         onFocus={() => handleInputFocus('entry3')}
@@ -146,19 +147,41 @@ let userinputed = {email:email,password:password};
 
                 <TouchableOpacity style={styles.Loginbutton} onPress={()=>{
 
-                
-                        // axios({
-                        //     method: 'post',
-                        //     url: 'http://192.168.1.63:80/api/auth.php',
-                        //     data: {
-                        //         //user_id:'0005',
-                        //         email:'jordan@idolo.com',
-                        //         password: 'jordanidolo',
-                        //         //first_name: 'michael jordan',
+                        if(email.match(validregex)){
+                            
+                            if(password.length < 8){
+                                Alert.alert('Password to short','Short passwords are easy to guess. Try one with at least 8 characters',[
+                                    {text:'close', onPress: () => console.log('alert closed')},
+                                ]);
 
-                        //     }
-                        //   });
-                        navigation.push("SUscreen2",userinputed)
+                            }
+                            else if(password===password1){
+                                navigation.push("SUscreen2",userinputed)
+                                setEmail('')
+                                setPassword('')
+                                setPassword1('')
+                            }
+                            else{
+                                Alert.alert('Password do not match','Please make sure your password match.',[
+                                    {text:'close', onPress: () => console.log('alert closed')},
+                                ]);
+                            }
+
+                        }
+                        else{
+                            Alert.alert('Invalid email','Please make sure your email is valid.',[
+                                {text:'close', onPress: () => console.log('alert closed')},
+                            ]);
+                        }
+
+
+
+
+                        //{email.match(validregex) ? console.log('valid email'):console.log('mali idoks') }
+
+
+
+                        //navigation.push("SUscreen2",userinputed)
 
 
 

@@ -19,12 +19,12 @@ import ProfileScreen from './ProfileScreen';
 import BookScreen2 from './BookingScreen/BookScreen2';
 import BookScreen3 from './BookingScreen/BookScreen3';
 import MapScreen from './BookingScreen/mapscreen';
+import MessageScreen from './MessageScreen';
+import BooklistScreen from './BooklistScreen';
+import PaymentMethodScreen from './BookingScreen/PaymentMethodScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useContext } from 'react';
-import Loginchecker from './test';
 
-const MessageScreen = () => null;
-const BooklistScreen = () => null;
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -46,6 +46,19 @@ return(
 
 )
 
+}
+
+export const Loginchecker = () =>{
+
+  const {loginaccess} = useContext(AuthenticationContext)
+  return(
+       
+    <NavigationContainer>  
+
+        {loginaccess ? <Appnav/>: <Account/>}
+    
+    </NavigationContainer>
+)
 }
 
 export const Account = () => {
@@ -91,7 +104,8 @@ const Homepage = () => {
 
 
         <Stack.Screen  name='MapScreen' component={MapScreen}/>
-                    
+        <Stack.Screen  name='ProfileScreen' component={ProfileScreen}/>
+        <Stack.Screen  name='PaymentMethodScreen' component={PaymentMethodScreen}/>          
   </Stack.Navigator>
   )
 }
@@ -119,11 +133,12 @@ export const Appnav = () => {
 
   return(
      <Tab.Navigator
+     initialRouteName='Home'
      screenOptions={screenOptionstabnav}
      
      >
-      <Tab.Screen name="Home" component={Homedrawer} />
       <Tab.Screen name="Messages" component={Messagedrawer} />
+      <Tab.Screen name="Home" component={Homedrawer} />
       <Tab.Screen name="Booklist" component={Booklistedrawer} />
       
     </Tab.Navigator>
@@ -150,10 +165,6 @@ const Homedrawer = () => {
       >
    
       <Stack.Screen name="Homepage" component={Homepage} />
-      {/* <Stack.Screen name="Sundo" component={SundoScreen} />
-      <Stack.Screen name="Book A Ride" component={BookARideScreen} />
-      <Stack.Screen name="Book for Later" component={BookForLaterScreen} />
-      <Stack.Screen name="Book for Someone" component={BookForSomeoneScreen} /> */}
     </Drawer.Navigator>
   );
 }
@@ -209,21 +220,25 @@ const SignOut = () => <Icon name="exit" size={20} />;
 const TellAfriend = () => <Icon name="share-social" size={20} />;
 const HelpAndFeedback = () => <Icon name="md-help-circle" size={20} />;
 
-const DrawerList = () => {
+const DrawerList = ({navigation}) => {
 
   const {setLoginaccess} = useContext(AuthenticationContext)
+  const {user_fname} = useContext(AuthenticationContext)
+  const {user_lname} = useContext(AuthenticationContext)
+  const {user_email} = useContext(AuthenticationContext)
 
   return (
     <DrawerContentScrollView>
       <View>
         <View style={{flexDirection:'row',marginTop:'10%',paddingLeft:10}}>
           <Image
-            source={require("./assets/fb_logo.png")}
+            source={require("./assets/icon_user.png")}
             style={{ width: 50, height: 50 }}
           />
           <View >
-            <Text style={{paddingLeft:10,fontSize:RFValue(14,680),top:'10%'}}>Peter Francis Robante</Text>
-            <Text style={{paddingLeft:10,fontSize:RFValue(10,680),top:'10%',color:'#7A7A7A'}}>robantepeterfran@gmail.com</Text>
+            <Text style={{paddingLeft:10,fontSize:RFValue(14,680),top:'10%'}}>{user_fname.charAt(0).toUpperCase() + user_fname.slice(1)
+                + ' ' + user_lname.charAt(0).toUpperCase() + user_lname.slice(1)}</Text>
+            <Text style={{paddingLeft:10,fontSize:RFValue(10,680),top:'10%',color:'#7A7A7A'}}>{user_email}</Text>
           </View>
 
           
@@ -231,7 +246,7 @@ const DrawerList = () => {
 
         <View style={{width:'100%',height:'2%',backgroundColor:'#25FFC4',marginTop:'5%'}}/>
 
-        <DrawerItem label="Profile" icon={Profile} />
+        <DrawerItem label="Profile" icon={Profile} onPress={()=>{navigation.navigate('ProfileScreen')}}/>
         <DrawerItem label="About" icon={About} />
         <DrawerItem label="Coupons" icon={Coupons} />
         <DrawerItem label="Rider Safety" icon={RiderSafety} />

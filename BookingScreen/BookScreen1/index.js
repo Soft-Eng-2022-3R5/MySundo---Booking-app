@@ -1,14 +1,28 @@
 import { useState } from "react";
 import { View,TextInput,TouchableOpacity,Text,Image,StatusBar } from "react-native"
 import Icon from 'react-native-vector-icons/AntDesign';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Feather from 'react-native-vector-icons/Feather';
+import axios from "../../plugin/axios";
 import { styles } from "./styles"
+import { useContext } from "react";
+import { AuthenticationContext } from "../../AuthContext";
 
 export default function BookScreen1({navigation}){
 
 const [bordercolor,setBordercolor] = useState('#f9feff');
 const [bordercolor1,setBordercolor1] = useState('#f9feff');
+const {paymentmethod} = useContext(AuthenticationContext);
+const {userid} = useContext(AuthenticationContext);
+const [bookingtype,setBookingtype] = useState('Book a ride');
+const [vehicleoption, setVehicleoption] = useState('');
+const [pickup,setPickup] = useState('n/a');
+const [dropoff,setDropoff] = useState('n/a');
+const [note1,setNote1] = useState('n/a');
+const [price1,setPrice1] = useState('0000');
+const [datebook,setDatebook] = useState(new Date());
+const [pickTime,setPickTime] = useState('now');
+const [pickDate,setPickDate] = useState('now');
+const [statusbooking,setStatusbooking] = useState('pending');
+
 
     return(
     
@@ -69,8 +83,8 @@ const [bordercolor1,setBordercolor1] = useState('#f9feff');
 
 
 
-            <TouchableOpacity style={styles.cashbutton}>
-                <Text style={styles.fontstyle3}>Cash</Text>
+            <TouchableOpacity style={styles.cashbutton} onPress={()=>{navigation.navigate('PaymentMethodScreen')}}>
+                <Text style={styles.fontstyle3}>{paymentmethod}</Text>
             </TouchableOpacity>
 
 
@@ -101,7 +115,7 @@ const [bordercolor1,setBordercolor1] = useState('#f9feff');
                                 borderWidth:1.5,
                                 flexDirection:'column'}}
                                 
-                                onPress={()=>{ setBordercolor('#00FC47'), setBordercolor1('#f9feff')}}
+                                onPress={()=>{ setBordercolor('#00FC47'), setBordercolor1('#f9feff'), setVehicleoption('motorcycle')}}
                                 >
 
                     <Image style={styles.motorlogo}
@@ -119,7 +133,7 @@ const [bordercolor1,setBordercolor1] = useState('#f9feff');
                                 borderWidth:1.5,
                                 flexDirection:'column'}}
 
-                                onPress={()=>{ setBordercolor('#f9feff'), setBordercolor1('#00FC47')}}
+                                onPress={()=>{ setBordercolor('#f9feff'), setBordercolor1('#00FC47'), setVehicleoption('car')}}
                                 >
 
                     <Image style={styles.carlogo}
@@ -150,7 +164,48 @@ const [bordercolor1,setBordercolor1] = useState('#f9feff');
                 <Text style={styles.fontstyle8}>TOTAL: 00.00</Text>
 
 
-                <TouchableOpacity style={styles.bookbutton}>
+                <TouchableOpacity style={styles.bookbutton}
+                
+                    onPress={()=>{
+
+                        axios.post('/api/booking.php', {
+                            
+                            
+                            user_id:userid,
+                            booking_type: bookingtype,
+                            pickup_location: pickup,
+                            dropoff_location: dropoff,
+                            type_vehicle:vehicleoption,
+                            payment_method: paymentmethod,
+                            note: note1,
+                            price: price1,
+                            date_created: datebook,
+                            pickup_date: pickDate,
+                            pickup_time: pickTime,
+                            status: statusbooking,
+                          
+           
+                            })
+                            .then(function (response) {
+                            console.log(response.data)
+                            
+                                
+                            })
+                            .catch(function (error) {
+                                console.log(error)
+                                
+                            });
+                        
+
+
+
+
+
+                    }}
+                
+                
+                
+                >
                     <Image style={styles.bookbuttonstyle}
                     source={require('../../assets/button.png')} resizeMode='cover'/>
                         <Text style={styles.textstylebutton}>BOOK</Text>

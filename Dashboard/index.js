@@ -11,7 +11,8 @@ import { AuthenticationContext } from '../AuthContext';
 export default function Dashboard({navigation}){
 
 
-    const {user} = useContext(AuthenticationContext);
+    const {user_fname} = useContext(AuthenticationContext);
+    const {user_lname} = useContext(AuthenticationContext);
 
     return(
 
@@ -28,7 +29,8 @@ export default function Dashboard({navigation}){
                         resizeMode='contain'
                     />
 
-                <Text style={styles.textstyle1}>Hello, {user}</Text>
+                <Text style={styles.textstyle1}>Hello, {user_fname.charAt(0).toUpperCase() + user_fname.slice(1)
+                + ' ' + user_lname.charAt(0).toUpperCase() + user_lname.slice(1)}</Text>
                 <Text style={styles.textstyle2}>Have a nice Day!</Text>
 
                 <TouchableOpacity style={styles.menubutton} onPress={()=>{
@@ -43,17 +45,7 @@ export default function Dashboard({navigation}){
                 </TouchableOpacity>
                 
 
-                <View style={styles.inputstyle}>
-                    
-                    <TextInput
-                        style={styles.searchbar}
-                        placeholder="Search"
-                    />
-                    
-                    <Feather name={'search'} size={25} color={'black'} 
-                    style={{position:'absolute',alignSelf:'flex-end',paddingRight:15,top:"20%",}} />
-
-                </View>
+                
 
             </View>
 

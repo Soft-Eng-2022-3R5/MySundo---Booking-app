@@ -137,7 +137,7 @@ icon3:{
     width:'10%',
     height:'40%',
     marginTop:'6.5%',
-    left:'172%'
+    left:'52%'
 },
 
 line2:{
@@ -151,8 +151,8 @@ line2:{
     
 },
 cashbutton:{
-
-    width:'15%',
+    
+    width:'35%',
     height:'47%',
     top:'5%',
     left:'15%'
@@ -161,13 +161,14 @@ cashbutton:{
 
 fontstyle3:{
     fontSize:RFValue(15,680),
+    width:'100%',
     top:'26%'
 },
 
 fontstyle4:{
     fontSize:RFValue(15,680),
     top:'7.2%',
-    left:'180%',
+    left:'55%',
 },
 
 fontstyle5:{

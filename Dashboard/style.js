@@ -57,7 +57,7 @@ pannel1:{
     backgroundColor:'skyblue',
     width:windowWidth,
     height:windowHeight/4,
-    marginBottom:'25%',
+    marginBottom:'15%',
     alignSelf:'center',
     justifyContent:'center'
 },
@@ -105,7 +105,7 @@ textstyle3:{
     fontSize: RFValue(14,680),
     fontWeight:'bold',
     paddingLeft:15,
-    top:'26%',
+    top:'23%',
 },
 
 textstyle4:{
@@ -144,7 +144,7 @@ pannel2:{
 
     backgroundColor:'#83FDDC',
     width:'90%',
-    height:150,
+    height:windowHeight/5,
     marginBottom:'5%',
     alignSelf:'center',
     justifyContent:'center',

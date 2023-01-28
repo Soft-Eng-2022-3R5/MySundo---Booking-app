@@ -20,7 +20,7 @@ export default function MapScreen({navigation}){
 
     })
 
-    console.log(marker)
+    console.log(marker.latitudeDelta)
 
     return(
         
