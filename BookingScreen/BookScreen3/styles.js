@@ -109,7 +109,7 @@ button3:{
     
     position:'absolute',
     right:'3%',
-    top:'46%',
+    top:'32%',
     marginBottom:'1.7%',
     alignSelf:'flex-end'
 },
