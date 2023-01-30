@@ -17,7 +17,7 @@ export default function PaymentMethodScreen({navigation}){
        <View>
        <TouchableOpacity style={styles.backbutton} onPress={()=>{
                         
-                        navigation.navigate('BookScreen1')
+                        navigation.goBack()
                     
                 }}>
                 

@@ -151,7 +151,7 @@ line2:{
 },
 cashbutton:{
 
-    width:'15%',
+    width:'35%',
     height:'47%',
     top:'5%',
     left:'15%'
@@ -160,6 +160,7 @@ cashbutton:{
 
 fontstyle3:{
     fontSize:RFValue(15,680),
+    width:'100%',
     top:'26%'
 },
 

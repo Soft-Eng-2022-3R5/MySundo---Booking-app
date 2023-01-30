@@ -1,3 +1,5 @@
+import React from 'react';
+import { useState } from "react";
 import { DrawerActions, NavigationContainer } from '@react-navigation/native';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -22,8 +24,13 @@ import MapScreen from './BookingScreen/mapscreen';
 import MessageScreen from './MessageScreen';
 import BooklistScreen from './BooklistScreen';
 import PaymentMethodScreen from './BookingScreen/PaymentMethodScreen';
+import NoteScreen from './BookingScreen/NoteScreen';
+import HistoryScreen1 from './BookHistory/HistoryScreen1';
+import HistoryScreen2 from './BookHistory/HistoryScreen2';
+import HistoryValidation from './BookHistory/HistoryValidation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useContext } from 'react';
+import axios from './plugin/axios';
 
 
 const Drawer = createDrawerNavigator();
@@ -105,7 +112,11 @@ const Homepage = () => {
 
         <Stack.Screen  name='MapScreen' component={MapScreen}/>
         <Stack.Screen  name='ProfileScreen' component={ProfileScreen}/>
-        <Stack.Screen  name='PaymentMethodScreen' component={PaymentMethodScreen}/>          
+        <Stack.Screen  name='PaymentMethodScreen' component={PaymentMethodScreen}/> 
+        <Stack.Screen  name='NoteScreen' component={NoteScreen}/>   
+        <Stack.Screen  name='HistoryScreen1' component={HistoryScreen1}/>  
+        <Stack.Screen  name='HistoryScreen2' component={HistoryScreen2}/>       
+        <Stack.Screen  name='HistoryValidation' component={HistoryValidation}/>     
   </Stack.Navigator>
   )
 }
@@ -226,6 +237,9 @@ const DrawerList = ({navigation}) => {
   const {user_fname} = useContext(AuthenticationContext)
   const {user_lname} = useContext(AuthenticationContext)
   const {user_email} = useContext(AuthenticationContext)
+  const {userid} = useContext(AuthenticationContext)
+  const [historyvalidation, setHistoryvalidation] = useState('');
+
 
   return (
     <DrawerContentScrollView>
@@ -248,8 +262,34 @@ const DrawerList = ({navigation}) => {
 
         <DrawerItem label="Profile" icon={Profile} onPress={()=>{navigation.navigate('ProfileScreen')}}/>
         <DrawerItem label="About" icon={About} />
-        <DrawerItem label="Coupons" icon={Coupons} />
-        <DrawerItem label="Rider Safety" icon={RiderSafety} />
+        <DrawerItem label="Book history" icon={Coupons} onPress={()=>{   
+
+                axios.post('/api/validation.php', {
+                                                      
+                  user_id: userid,
+
+                  })
+                  .then(function (response) {
+                    setHistoryvalidation(response.data[0].Message)
+                
+                  })
+                  .catch(function (error) {
+                      console.log(error)
+                      
+                  })
+
+                  if(historyvalidation === 'false'){
+
+                    navigation.navigate('HistoryValidation')
+                  }
+                  else if(historyvalidation === 'true'){
+
+                    navigation.navigate('HistoryScreen1')
+                  }
+
+
+        }}/>
+        <DrawerItem label="Rider Safety" icon={RiderSafety}/>
         <DrawerItem label="Sign Out" icon={SignOut} onPress={()=>{setLoginaccess(false)}}/>
       </View>
 
