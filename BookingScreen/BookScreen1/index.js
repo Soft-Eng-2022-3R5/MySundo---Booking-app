@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View,TextInput,TouchableOpacity,Text,Image,StatusBar } from "react-native"
+import { View,TextInput,TouchableOpacity,Text,Image,StatusBar,Alert } from "react-native"
 import Icon from 'react-native-vector-icons/AntDesign';
 import axios from "../../plugin/axios";
 import { styles } from "./styles"
@@ -12,11 +12,11 @@ const [bordercolor,setBordercolor] = useState('#f9feff');
 const [bordercolor1,setBordercolor1] = useState('#f9feff');
 const {paymentmethod} = useContext(AuthenticationContext);
 const {userid} = useContext(AuthenticationContext);
+const {ridernotes} = useContext(AuthenticationContext);
 const [bookingtype,setBookingtype] = useState('Book a ride');
 const [vehicleoption, setVehicleoption] = useState('');
 const [pickup,setPickup] = useState('n/a');
 const [dropoff,setDropoff] = useState('n/a');
-const [note1,setNote1] = useState('n/a');
 const [price1,setPrice1] = useState('0000');
 const [datebook,setDatebook] = useState(new Date());
 const [pickTime,setPickTime] = useState('now');
@@ -68,7 +68,7 @@ const [statusbooking,setStatusbooking] = useState('pending');
               
                 <Text style={styles.fontstyle2}>Write a note to Sundo Driver</Text>
                 
-                <TouchableOpacity style={styles.button1}>
+                <TouchableOpacity style={styles.button1} onPress={()=>{navigation.navigate('NoteScreen')}}>
                 <Icon 
                 name={'right'} size={32} color={'#7A7A7A'} />
                 </TouchableOpacity>
@@ -141,17 +141,17 @@ const [statusbooking,setStatusbooking] = useState('pending');
                     <Text style={{textAlign:'center',fontWeight:'bold'}}>Car</Text>
                 </TouchableOpacity>
 
-                <View style={{backgroundColor:'white',
-                                width:'25%',
-                                height:'85%',
-                                marginTop:'2.5%',
-                                borderRadius:10,
-                                elevation:4,
-                                borderColor:'white',
-                                borderWidth:1.5,
-                                flexDirection:'column'}}>
+                    <View style={{backgroundColor:'white',
+                                    width:'25%',
+                                    height:'85%',
+                                    marginTop:'2.5%',
+                                    borderRadius:10,
+                                    elevation:4,
+                                    borderColor:'white',
+                                    borderWidth:1.5,
+                                    flexDirection:'column'}}>
 
-                <Text style={{textAlign:'center',top:'30%',fontWeight:'bold'}}>Comming soon!</Text>
+                    <Text style={{textAlign:'center',top:'30%',fontWeight:'bold'}}>Comming soon!</Text>
                 </View>
                
             </View>
@@ -167,44 +167,50 @@ const [statusbooking,setStatusbooking] = useState('pending');
                 <TouchableOpacity style={styles.bookbutton}
                 
                     onPress={()=>{
-
-                        axios.post('/api/booking.php', {
-                            
-                            
-                            user_id:userid,
-                            booking_type: bookingtype,
-                            pickup_location: pickup,
-                            dropoff_location: dropoff,
-                            type_vehicle:vehicleoption,
-                            payment_method: paymentmethod,
-                            note: note1,
-                            price: price1,
-                            date_created: datebook,
-                            pickup_date: pickDate,
-                            pickup_time: pickTime,
-                            status: statusbooking,
-                          
-           
-                            })
-                            .then(function (response) {
-                            console.log(response.data)
-                            
-                                
-                            })
-                            .catch(function (error) {
-                                console.log(error)
-                                
-                            });
                         
+                        if(vehicleoption === ''){
 
+                            Alert.alert('Book Failed','Dont forget to select type of sundo vechicle.',[
+                                {text:'close', onPress: () => console.log('alert closed')},
+                            
+                            ]);
+                        }
 
+                        else{
 
+                            axios.post('/api/booking.php', {
+                            
+                                user_id:userid,
+                                booking_type: bookingtype,
+                                pickup_location: pickup,
+                                dropoff_location: dropoff,
+                                someone_fullname: 'n/a',
+                                someone_contact_no:'0',
+                                type_vehicle:vehicleoption,
+                                payment_method: paymentmethod,
+                                note: ridernotes,
+                                price: price1,
+                                date_created: datebook,
+                                pickup_date: pickDate,
+                                pickup_time: pickTime,
+                                status: statusbooking,
+                              
+                                })
+                                .then(function (response) {
+                                console.log(response.data)
+                                
+                                    
+                                })
+                                .catch(function (error) {
+                                    console.log(error)
+                                    
+                                });
 
+                                navigation.navigate('Dashboard');
+                        }
 
                     }}
-                
-                
-                
+                                
                 >
                     <Image style={styles.bookbuttonstyle}
                     source={require('../../assets/button.png')} resizeMode='cover'/>

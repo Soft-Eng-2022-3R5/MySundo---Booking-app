@@ -17,7 +17,7 @@ container1:{
 locationicon:{
 
     position:'absolute',
-    height:'10%',
+    height:windowHeight/10,
     width:'10%',
     alignSelf:'flex-start',
     marginTop:'6.5%',
@@ -28,18 +28,19 @@ locationicon:{
 searchlocation:{
 
     width:'70%',
-    height:'30%',
+    height:windowHeight/18,
     alignSelf:'center',
     left:'3%',
     color:'black',
     paddingLeft:10,
+
 
 },
 
 fontstyle1:{
 
     left:'20%',
-    top:'-37%',
+    top:'-25%',
     fontWeight:'bold',
     color:'#7A7A7A'
 },
@@ -56,7 +57,7 @@ line1:{
 },
 option1:{
     width:'100%',
-    height:windowHeight/6,
+    height:windowHeight/3.5,
     backgroundColor:'white',
     alignSelf:'center',
     borderBottomWidth:1,
@@ -64,6 +65,7 @@ option1:{
     marginTop:'5%',
   
 },
+
 
 option2:{
 
@@ -132,26 +134,26 @@ icon2:{
 },
 
 icon3:{
-
+    position:'absolute',
     width:'10%',
-    height:'40%',
+    height:'5%',
     marginTop:'6.5%',
-    left:'172%'
+    left:'52%'
 },
 
 line2:{
 
     position:'absolute',
     alignSelf:'center',
-    height:'6%',
+    height:windowHeight/19,
     borderLeftWidth:2,
-    top:windowHeight/3.83,
+    top:windowHeight/2.63,
     borderColor:'#d9d9d9',
     
 },
 cashbutton:{
 
-    width:'15%',
+    width:'35%',
     height:'47%',
     top:'5%',
     left:'15%'
@@ -160,20 +162,40 @@ cashbutton:{
 
 fontstyle3:{
     fontSize:RFValue(15,680),
+    width:'100%',
     top:'26%'
 },
 
 fontstyle4:{
-    fontSize:RFValue(15,680),
-    top:'7.2%',
-    left:'180%',
+    fontSize:RFValue(13,680),
+    top:'10%',
+    fontWeight:'bold',
+    //left:windowWidth/3.6,
+},
+
+datestyle:{
+    position:'absolute',
+    width:'22%',
+    height:'40%',
+    top:'37%',
+    left:'62%',
+    //backgroundColor:'red'
+},
+
+timestyle:{
+    position:'absolute',
+    width:'19%',
+    height:'40%',
+    top:'37%',
+    left:'83%',
+    //backgroundColor:'yellow'
 },
 
 fontstyle5:{
     position:'absolute',
     fontWeight:'bold',
     alignSelf:'flex-start',
-    top:windowHeight/3.95,
+    top:windowHeight/2.68,
     fontSize:RFValue(12,680),
     left:'5%',
     color:'#7A7A7A'
@@ -182,7 +204,7 @@ fontstyle6:{
     position:'absolute',
     fontWeight:'bold',
     alignSelf:'flex-start',
-    top:windowHeight/3.95,
+    top:windowHeight/2.68,
     fontSize:RFValue(12,680),
     left:'55%',
     color:'#7A7A7A'
@@ -230,7 +252,8 @@ fontstyle8:{
     fontSize:RFValue(26,680),
     fontWeight:'700',
     alignSelf:'flex-start',
-    marginTop:'10%',
+    marginTop:'5%',
+    
     left:'5%',
 
 },
@@ -238,7 +261,7 @@ fontstyle8:{
 
 bookbutton:{
 
-    marginTop:'20%',
+    marginTop:'5%',
     //backgroundColor:'red',
     width:'80%',
     height:'9%',
@@ -266,5 +289,43 @@ textstylebutton:{
 
 
 },
+
+fontstyle9:{
+    position:'absolute',
+    top:'47%',
+    paddingLeft:10,
+    fontWeight:'bold'
+    
+    },
+    
+    fontstyle10:{
+    
+        width:'23%',
+        height:'80%',
+        marginTop:'3%',
+        //backgroundColor:'red',
+        paddingLeft:10
+       
+        
+        },
+    
+    textinputstyle1:{
+    
+        
+        height:'75%',
+        width:'70%',
+        borderBottomWidth:1,
+        paddingLeft:10,
+        paddingRight:10,
+        
+    },
+    
+    const1:{
+        //justifyContent:'center',
+        flexDirection:'column',
+        height:windowHeight/7.5,
+        top:'-2%',
+    
+    },
 
 })

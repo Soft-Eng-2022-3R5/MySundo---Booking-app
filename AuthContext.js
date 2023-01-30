@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { createContext } from "react";
 import axios from './plugin/axios'
@@ -15,7 +14,8 @@ export const AuthenticationProvider = ({children}) => {
     const [user_lname, setUser_lname] = useState ('');
     const [user_email, setUser_email] = useState ('');
     const [paymentmethod,setPaymentmethod] = useState('cash')
-
+    const [ridernotes,setRidernotes] = useState('N/A')
+    const [book_id,setBook_id] = useState('0');
 
     const loginRequest = (email,password) => {
 
@@ -52,7 +52,7 @@ export const AuthenticationProvider = ({children}) => {
                setUser_fname(response.data[0].first_name)
                setUser_lname(response.data[0].last_name)
                setUser_email(response.data[0].email)
-
+                
               })
               .catch(function (error) {
                 console.log(error)
@@ -73,7 +73,8 @@ export const AuthenticationProvider = ({children}) => {
 
   
         <AuthenticationContext.Provider value={{loginRequest,loginaccess,setLoginaccess,
-        user_fname,user_lname,user_email,paymentmethod,setPaymentmethod,userid}}>
+        user_fname,user_lname,user_email,paymentmethod,setPaymentmethod,userid,ridernotes,
+        setRidernotes,book_id,setBook_id}}>
             
             {children }
 

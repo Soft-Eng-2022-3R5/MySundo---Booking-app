@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { View,TextInput,TouchableOpacity,Text,Image,StatusBar } from "react-native"
+import { View,TextInput,TouchableOpacity,Text,Image,StatusBar,Alert } from "react-native"
 import Icon from 'react-native-vector-icons/AntDesign';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Feather from 'react-native-vector-icons/Feather';
 import { styles } from "./styles"
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useContext } from "react";
+import { AuthenticationContext } from "../../AuthContext";
+import axios from "../../plugin/axios";
 
 export default function BookScreen2({navigation}){
 
@@ -27,9 +28,9 @@ let tempDate = new Date(currentDate);
 let fDate = tempDate.getDate() + '/' + (tempDate.getMonth()+1) + '/' + tempDate.getFullYear();
 let fTime = tempDate.getHours() + ':' + tempDate.getMinutes();
 setText(fDate + '\n' + fTime)
-setAdlaw(fDate)
+
     //console.log(fDate + '('+ fTime + ')')
-    console.log(fDate)
+
     setDatedisplay(fDate)
     setOras(fTime)
 }
@@ -39,8 +40,18 @@ const showMode = (currentMode) => {
     setMode(currentMode);
 }
 
-const [adlaw, setAdlaw] = useState();
 const [oras, setOras] = useState('00:00');
+
+const {paymentmethod} = useContext(AuthenticationContext);
+const {userid} = useContext(AuthenticationContext);
+const [bookingtype,setBookingtype] = useState('Book for later');
+const [vehicleoption, setVehicleoption] = useState('');
+const [pickup,setPickup] = useState('n/a');
+const [dropoff,setDropoff] = useState('n/a');
+const {ridernotes} = useContext(AuthenticationContext);
+const [price1,setPrice1] = useState('0000');
+const [datebook,setDatebook] = useState(new Date());
+const [statusbooking,setStatusbooking] = useState('pending');
 
     return(
     
@@ -88,7 +99,7 @@ const [oras, setOras] = useState('00:00');
                 
                 <TouchableOpacity style={styles.button1}>
                 <Icon 
-                name={'right'} size={32} color={'#7A7A7A'} />
+                name={'right'} size={32} color={'#7A7A7A'} onPress={()=>{navigation.navigate('NoteScreen')}} />
                 </TouchableOpacity>
 
             </View>
@@ -101,8 +112,8 @@ const [oras, setOras] = useState('00:00');
 
 
 
-            <TouchableOpacity style={styles.cashbutton}>
-                <Text style={styles.fontstyle3}>Cash</Text>
+            <TouchableOpacity style={styles.cashbutton} onPress={()=>{navigation.navigate('PaymentMethodScreen')}}>
+                <Text style={styles.fontstyle3}>{paymentmethod}</Text>
             </TouchableOpacity>
 
 
@@ -159,7 +170,7 @@ const [oras, setOras] = useState('00:00');
                                 borderWidth:1.5,
                                 flexDirection:'column'}}
                                 
-                                onPress={()=>{ setBordercolor('#00FC47'), setBordercolor1('#f9feff')}}
+                                onPress={()=>{ setBordercolor('#00FC47'), setBordercolor1('#f9feff'), setVehicleoption('motorcycle')}}
                                 >
 
                     <Image style={styles.motorlogo}
@@ -177,7 +188,7 @@ const [oras, setOras] = useState('00:00');
                                 borderWidth:1.5,
                                 flexDirection:'column'}}
 
-                                onPress={()=>{ setBordercolor('#f9feff'), setBordercolor1('#00FC47')}}
+                                onPress={()=>{ setBordercolor('#f9feff'), setBordercolor1('#00FC47'), setVehicleoption('car')}}
                                 >
 
                     <Image style={styles.carlogo}
@@ -208,7 +219,56 @@ const [oras, setOras] = useState('00:00');
                 <Text style={styles.fontstyle8}>TOTAL: 00.00</Text>
 
 
-                <TouchableOpacity style={styles.bookbutton} onPress={()=>{navigation.goBack()}}>
+                <TouchableOpacity style={styles.bookbutton} onPress={()=>{
+
+
+                               if(vehicleoption === ''){
+                                Alert.alert('Book Failed','Dont forget to select type of sundo vechicle.',[
+                                    {text:'close', onPress: () => console.log('alert closed')},
+                                
+                                ]);
+
+                               }
+                               else if(datedisplay === '00/00/0000'){
+                                Alert.alert('Book Failed','Dont forget to set the date and time when to be picked up',[
+                                    {text:'close', onPress: () => console.log('alert closed')},
+                                
+                                ]);
+                               }
+                               else{
+                                axios.post('/api/booking.php', {
+                                                                              
+                                    user_id:userid,
+                                    booking_type: bookingtype,
+                                    pickup_location: pickup,
+                                    dropoff_location: dropoff,
+                                    someone_fullname: 'n/a',
+                                    someone_contact_no:'0',
+                                    type_vehicle:vehicleoption,
+                                    payment_method: paymentmethod,
+                                    note: ridernotes,
+                                    price: price1,
+                                    date_created: datebook,
+                                    pickup_date: datedisplay,
+                                    pickup_time: oras,
+                                    status: statusbooking,
+                                
+                                    })
+                                    .then(function (response) {
+                                    console.log(response.data)
+                                    
+                                        
+                                    })
+                                    .catch(function (error) {
+                                        console.log(error)
+                                        
+                                    });
+
+                                    navigation.navigate('Dashboard');
+                               }
+
+
+                }}>
                     <Image style={styles.bookbuttonstyle}
                     source={require('../../assets/button.png')} resizeMode='cover'/>
                         <Text style={styles.textstylebutton}>BOOK</Text>
